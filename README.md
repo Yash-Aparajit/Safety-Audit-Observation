@@ -191,3 +191,16 @@ Images are:
 -Role-based access
 -Offline submission queue
 
+---
+
+**👨‍💻 Author**
+
+By Yash Aparajit
+Internal Industrial Automation Project. Designed for manufacturing safety digitization.
+
+---
+
+**📄 License**
+
+Internal Use Only
+Not intended for public redistribution.
