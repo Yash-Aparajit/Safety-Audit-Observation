@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+
+*{box-sizing:border-box;}
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+
+background-image:
+linear-gradient(rgba(255,255,255,0.30), rgba(255,255,255,0.30)),
+url("https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
+
+min-height:100vh;
+}
+
+.container{
+max-width:540px;
+margin:auto;
+padding:20px;
+}
+
+.header{
+text-align:center;
+color:white;
+margin-bottom:10px;
+}
+
+.title{
+font-size:28px;
+font-weight:600;
+}
+
+.card{
+background:rgba(255,255,255,0.96);
+padding:20px;
+border-radius:16px;
+margin-top:15px;
+box-shadow:0 8px 30px rgba(0,0,0,0.15);
+}
+
+label{
+display:flex;
+align-items:center;
+gap:8px;
+margin-top:15px;
+font-weight:500;
+color:#222;
+}
+
+input,textarea,select{
+width:100%;
+padding:12px;
+margin-top:6px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:15px;
+}
+
+.shift{
+display:flex;
+gap:8px;
+}
+
+.shift button{
+flex:1;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#eee;
+font-weight:500;
+}
+
+.shift button.active{
+background:#1565C0;
+color:white;
+}
+
+.type{
+padding:14px;
+background:#eee;
+border-radius:10px;
+margin-top:10px;
+cursor:pointer;
+}
+
+.type.active{
+background:#2E7D32;
+color:white;
+}
+
+.save{
+margin-top:20px;
+padding:14px;
+width:100%;
+border:none;
+border-radius:12px;
+background:#00C853;
+color:white;
+font-size:17px;
+font-weight:600;
+}
+
+.msg{
+margin-top:12px;
+font-weight:600;
+opacity:0;
+transition:opacity 0.4s ease;
+}
+
+.msg.show{
+opacity:1;
+}
+
+.hidden{display:none;}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<div class="title">Safety Audit Observation</div>
+</div>
+
+
+<div class="card">
+
+<label>Plant</label>
+
+<select id="plant">
+<option value="">--select--</option>
+</select>
+
+
+<label>Line</label>
+
+<input list="lineList" id="line" placeholder="Search or select line">
+
+<datalist id="lineList"></datalist>
+
+
+<label>Line Location/Area</label>
+
+<input id="area">
+
+
+<label>Shift</label>
+
+<div class="shift">
+
+<button onclick="setShift(this)">1st Shift</button>
+<button onclick="setShift(this)">2nd Shift</button>
+<button onclick="setShift(this)">3rd Shift</button>
+
+</div>
+
+
+<label>Auditor Name</label>
+
+<input id="auditor">
+
+
+<label>Supervisor Name</label>
+
+<input id="supervisor">
+
+</div>
+
+
+
+<div class="card">
+
+<label>Observation Type</label>
+
+<div class="type" onclick="setType(this)">Unsafe Act</div>
+<div class="type" onclick="setType(this)">Unsafe Condition</div>
+<div class="type" onclick="setType(this)">Near Miss</div>
+<div class="type" onclick="setType(this)">First Aid</div>
+
+
+<div id="firstAidDiv" class="hidden">
+
+<label>Injury Point</label>
+<input id="injuryPoint">
+
+<label>Employee Name</label>
+<input id="empName">
+
+<label>Employee Contractor</label>
+<input id="empContract">
+
+<label>Root Cause</label>
+<input id="rootCause">
+
+<label>Action Taken</label>
+<input id="actionTaken">
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<label>NC Observation Remark</label>
+
+<textarea id="remark"></textarea>
+
+
+<label>Image</label>
+
+<input type="file" id="image" accept="image/*" capture="environment">
+
+<img id="preview">
+
+</div>
+
+
+
+<div class="card">
+
+<label>Responsibility</label>
+<input id="responsibility">
+
+
+<label>Action Plan</label>
+<textarea id="actionPlan"></textarea>
+
+
+<label>Target Date</label>
+<input type="date" id="targetDate">
+
+
+<label>Status</label>
+<input id="status" value="Open">
+
+
+<button class="save" onclick="save()">Submit Observation</button>
+
+<div id="msg" class="msg"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let selectedShift="";
+let selectedType="";
+let isSaving=false;
+
+
+function setShift(btn){
+
+document.querySelectorAll(".shift button")
+.forEach(b=>b.classList.remove("active"));
+
+btn.classList.add("active");
+
+selectedShift=btn.innerText;
+
+}
+
+
+function setType(el){
+
+document.querySelectorAll(".type")
+.forEach(e=>e.classList.remove("active"));
+
+el.classList.add("active");
+
+selectedType=el.innerText;
+
+firstAidDiv.classList.add("hidden");
+
+if(selectedType=="First Aid")
+firstAidDiv.classList.remove("hidden");
+
+}
+
+
+
+image.onchange=function(){
+
+const reader=new FileReader();
+
+reader.onload=function(){
+preview.src=reader.result;
+};
+
+reader.readAsDataURL(image.files[0]);
+
+};
+
+
+
+let fadeTimer=null;
+
+
+function showMessage(text,color="green")
+{
+msg.innerText=text;
+msg.style.color=color;
+
+msg.classList.add("show");
+
+clearTimeout(fadeTimer);
+
+fadeTimer=setTimeout(()=>{
+msg.classList.remove("show");
+},8000);
+}
+
+
+
+function save()
+{
+if(isSaving) return;
+
+
+if(!plant.value)
+{
+showMessage("Select Plant","red");
+return;
+}
+
+if(!line.value)
+{
+showMessage("Select Line","red");
+return;
+}
+
+if(!selectedShift)
+{
+showMessage("Select Shift","red");
+return;
+}
+
+if(!selectedType)
+{
+showMessage("Select Observation Type","red");
+return;
+}
+
+
+isSaving=true;
+
+
+const btn=document.querySelector(".save");
+
+btn.disabled=true;
+
+btn.innerHTML="Submitting<span style='margin-left:6px;'>⏳</span>";
+
+
+const file=image.files[0];
+
+
+if(file)
+{
+const reader=new FileReader();
+
+reader.onload=function()
+{
+submit(reader.result.split(",")[1]);
+};
+
+reader.readAsDataURL(file);
+}
+else
+{
+submit("");
+}
+
+}
+
+
+function submit(base64)
+{
+
+const form={
+
+plant:plant.value,
+line:line.value,
+area:area.value,
+shift:selectedShift,
+
+auditor:auditor.value,
+supervisor:supervisor.value,
+
+type:selectedType,
+
+injuryPoint:injuryPoint.value,
+empName:empName.value,
+empContract:empContract.value,
+
+rootCause:rootCause.value,
+actionTaken:actionTaken.value,
+
+remark:remark.value,
+
+image:base64,
+
+responsibility:responsibility.value,
+actionPlan:actionPlan.value,
+targetDate:targetDate.value,
+status:status.value
+
+};
+
+
+google.script.run
+
+.withSuccessHandler(function()
+{
+
+showMessage("Observation Submitted Successfully","green");
+
+resetForm();
+
+setTimeout(()=>{
+isSaving=false;
+const btn=document.querySelector(".save");
+btn.disabled=false;
+btn.innerText="Submit Observation";
+},500);
+
+})
+
+.withFailureHandler(function(err)
+{
+
+showMessage("Submission Failed: "+err.message,"red");
+
+setTimeout(()=>{
+isSaving=false;
+const btn=document.querySelector(".save");
+btn.disabled=false;
+btn.innerText="Submit Observation";
+},500);
+
+})
+
+.saveEntry(form);
+
+}
+
+
+function resetForm()
+{
+
+plant.value="";
+
+line.value="";
+
+area.value="";
+
+auditor.value="";
+
+supervisor.value="";
+
+remark.value="";
+
+responsibility.value="";
+
+actionPlan.value="";
+
+targetDate.value="";
+
+status.value="Open";
+
+image.value="";
+
+preview.src="";
+
+selectedShift="";
+
+selectedType="";
+
+
+document.querySelectorAll(".shift button")
+.forEach(b=>b.classList.remove("active"));
+
+
+document.querySelectorAll(".type")
+.forEach(b=>b.classList.remove("active"));
+
+
+firstAidDiv.classList.add("hidden");
+
+}
+
+
+google.script.run
+.withSuccessHandler(data=>{
+
+data.plants.forEach(p=>
+plant.innerHTML+=`<option>${p}</option>`
+);
+
+data.lines.forEach(l=>{
+
+const opt=document.createElement("option");
+
+opt.value=l;
+
+lineList.appendChild(opt);
+
+});
+
+})
+.getMaster();
+
+</script>
+
+</body>
+</html>
