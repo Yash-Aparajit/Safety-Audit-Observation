@@ -20,34 +20,35 @@ The system allows auditors and supervisors to:
 - Track corrective actions
 - Maintain centralized audit records automatically in Google Sheets
 
-Designed for **industrial environments**, optimized for **speed, clarity, and zero duplicate submissions**.
+Designed for industrial environments, optimized for speed, clarity, and zero duplicate submissions.
 
 ---
 
 ## 🚀 Features
 
-✅ Mobile-first UI  
-✅ Searchable Line selection  
-✅ Dynamic form fields 
-✅ Image capture & Drive storage  
-✅ Duplicate submission prevention  
-✅ Auto timestamp logging  
-✅ Status tracking workflow  
-✅ Clean enterprise UI/UX  
-✅ Google Workspace native integration  
+- Mobile-first UI
+- Searchable Line selection
+- Dynamic form fields
+- Image capture & Drive storage
+- Duplicate submission prevention
+- Auto timestamp logging
+- Status tracking workflow
+- Clean enterprise UI/UX
+- Google Workspace native integration
 
 ---
 
 ## 🏗 System Architecture
 
+```
 Operator (Mobile)
-↓
+        ↓
 Apps Script Web App
-↓
+        ↓
 Google Sheets (Database)
-↓
+        ↓
 Google Drive (Image Storage)
-
+```
 
 ---
 
@@ -65,32 +66,39 @@ Google Drive (Image Storage)
 
 ## 📂 Project Structure
 
+```
 SAO-App/
 │
-├── code.gs # Backend logic
-├── index.html # UI + client logic
+├── code.gs        # Backend logic
+├── index.html     # UI + client logic
 └── README.md
-
+```
 
 ---
 
 ## ⚙️ Setup Guide
 
-Follow steps **exactly**.
+Follow steps exactly.
 
+---
 
-**# 1️⃣ Google Sheet Setup**
+### 1️⃣ Google Sheet Setup
 
 Create a new Google Spreadsheet.
 
-### Rename spreadsheet:
+Rename spreadsheet:
+
+```
 SAO System
+```
 
-### Create Sheet:  
+Create sheet:
+
+```
 SAO_Log
+```
 
-
-### Add Header Row (Row 1)
+#### Header Row (Row 1)
 
 | Column | Header |
 |---|---|
@@ -117,85 +125,103 @@ SAO_Log
 
 ---
 
-**# 2️⃣ Google Drive Setup (Image Storage)**
+### 2️⃣ Google Drive Setup (Image Storage)
 
-### Step 1
-Create folder in Google Drive:
+Create folder:
+
+```
 SAO Images
+```
 
+Copy Folder ID from:
 
-### Step 2
-Open folder → copy Folder ID from URL:
+```
+https://drive.google.com/drive/folders/FOLDER_ID
+```
 
-
-### Step 3
 Paste into `code.gs`:
 
 ```javascript
 const IMAGE_FOLDER_ID = "PASTE_FOLDER_ID_HERE";
+```
 
 ---
 
-**# 3️⃣ Apps Script Setup**
+### 3️⃣ Apps Script Setup
 
-Open Spreadsheet
+1. Open Spreadsheet  
+2. Extensions → Apps Script  
+3. Delete default files  
+4. Create files:
 
-Extensions → Apps Script
-
-Delete default files
-
-Create:
+```
 code.gs
 index.html
+```
+
+5. Paste project code.
 
 ---
 
-**# 4️⃣ Deploy Web App**
+### 4️⃣ Deploy Web App
 
-🔒 Duplicate Submission Protection
+Apps Script → Deploy → New Deployment
+
+| Setting | Value |
+|---|---|
+| Type | Web App |
+| Execute As | Me |
+| Access | Anyone |
+
+Deploy and copy the Web App URL.
+
+---
+
+## 🔒 Duplicate Submission Protection
 
 Three-level protection implemented:
 
-Layer	Protection
-| Layer  | Protection                     |
-| ------ | ------------------------------ |
-| UI     | Button disabled while saving   |
-| Client | `isSaving` state lock          |
-| Server | `LockService` transaction lock |
-This prevents accidental double entries.
+| Layer | Protection |
+|---|---|
+| UI | Button disabled while saving |
+| Client | isSaving state lock |
+| Server | LockService transaction lock |
+
+Prevents accidental duplicate entries.
 
 ---
 
-**📸 Image Handling**
+## 📸 Image Handling
 
 Images are:
--Captured from device camera
--Converted to Base64
--Uploaded to Drive folder
--Stored as link in Sheet
--Preview auto-generated
+
+- Captured from device camera
+- Converted to Base64
+- Uploaded to Drive folder
+- Stored as link in Sheet
+- Preview generated automatically
 
 ---
 
-**🛠 Future Improvements**
+## 🛠 Future Improvements
 
--Dashboard view
--Status update panel
--Email notifications
--Analytics charts
--Role-based access
--Offline submission queue
+- Dashboard view
+- Status update panel
+- Email notifications
+- Analytics charts
+- Role-based access
+- Offline submission queue
 
 ---
 
-**👨‍💻 Author**
+## 👨‍💻 Author
 
 By Yash Aparajit
 Internal Industrial Automation Project. Designed for manufacturing safety digitization.
 
 ---
 
-**📄 License**
+## 📄 License
 
-Internal Use Only
+Internal Use Only  
 Not intended for public redistribution.
