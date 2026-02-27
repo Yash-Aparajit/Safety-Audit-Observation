@@ -179,3 +179,15 @@ Images are:
 -Uploaded to Drive folder
 -Stored as link in Sheet
 -Preview auto-generated
+
+---
+
+**🛠 Future Improvements**
+
+-Dashboard view
+-Status update panel
+-Email notifications
+-Analytics charts
+-Role-based access
+-Offline submission queue
+
