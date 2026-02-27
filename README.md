@@ -1,2 +1,41 @@
-# Safety-Audit-Observation
-Safety Audit Observation (SAO) is a mobile-first web application built using Google Apps Script to digitize safety inspection and audit reporting in manufacturing environments. The system enables auditors to quickly capture safety observations, attach images, assign responsibilities, and track corrective actions in real time.
+# 🛡 Safety Audit Observation (SAO) Web App
+
+![Google Apps Script](https://img.shields.io/badge/Platform-Google%20Apps%20Script-green)
+![Status](https://img.shields.io/badge/Status-Production%20Ready-success)
+![UI](https://img.shields.io/badge/UI-Mobile%20First-blue)
+![License](https://img.shields.io/badge/License-Internal-lightgrey)
+![Maintenance](https://img.shields.io/badge/Maintained-Yes-brightgreen)
+
+---
+
+## 📌 Overview
+
+**Safety Audit Observation (SAO)** is a mobile-first web application built using **Google Apps Script** for capturing safety observations directly from the shop floor.
+
+The system allows auditors and supervisors to:
+
+- Record safety observations
+- Capture images instantly
+- Assign responsibility
+- Track corrective actions
+- Maintain centralized audit records automatically in Google Sheets
+
+Designed for **industrial environments**, optimized for **speed, clarity, and zero duplicate submissions**.
+
+---
+
+## 🚀 Features
+
+✅ Mobile-first UI  
+✅ Searchable Line selection  
+✅ Dynamic form fields 
+✅ Image capture & Drive storage  
+✅ Duplicate submission prevention  
+✅ Auto timestamp logging  
+✅ Status tracking workflow  
+✅ Clean enterprise UI/UX  
+✅ Google Workspace native integration  
+
+---
+
+## 🏗 System Architecture
