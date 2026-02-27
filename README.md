@@ -78,7 +78,6 @@ SAO-App/
 
 Follow steps **exactly**.
 
----
 
 **# 1️⃣ Google Sheet Setup**
 
@@ -90,8 +89,6 @@ SAO System
 ### Create Sheet:  
 SAO_Log
 
-
----
 
 ### Add Header Row (Row 1)
 
@@ -154,8 +151,6 @@ index.html
 ---
 
 **# 4️⃣ Deploy Web App**
-
----
 
 🔒 Duplicate Submission Protection
 
