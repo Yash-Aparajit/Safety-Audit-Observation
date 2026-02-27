@@ -80,7 +80,7 @@ Follow steps **exactly**.
 
 ---
 
-# 1️⃣ Google Sheet Setup
+**# 1️⃣ Google Sheet Setup**
 
 Create a new Google Spreadsheet.
 
@@ -120,7 +120,7 @@ SAO_Log
 
 ---
 
-# 2️⃣ Google Drive Setup (Image Storage)
+**# 2️⃣ Google Drive Setup (Image Storage)**
 
 ### Step 1
 Create folder in Google Drive:
@@ -136,3 +136,46 @@ Paste into `code.gs`:
 
 ```javascript
 const IMAGE_FOLDER_ID = "PASTE_FOLDER_ID_HERE";
+
+---
+
+**# 3️⃣ Apps Script Setup**
+
+Open Spreadsheet
+
+Extensions → Apps Script
+
+Delete default files
+
+Create:
+code.gs
+index.html
+
+---
+
+**# 4️⃣ Deploy Web App**
+
+---
+
+🔒 Duplicate Submission Protection
+
+Three-level protection implemented:
+
+Layer	Protection
+| Layer  | Protection                     |
+| ------ | ------------------------------ |
+| UI     | Button disabled while saving   |
+| Client | `isSaving` state lock          |
+| Server | `LockService` transaction lock |
+This prevents accidental double entries.
+
+---
+
+**📸 Image Handling**
+
+Images are:
+-Captured from device camera
+-Converted to Base64
+-Uploaded to Drive folder
+-Stored as link in Sheet
+-Preview auto-generated
