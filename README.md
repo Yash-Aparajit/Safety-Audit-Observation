@@ -49,3 +49,20 @@ Google Sheets (Database)
 Google Drive (Image Storage)
 
 
+---
+
+## 🧰 Tech Stack
+
+| Component | Technology |
+|---|---|
+| Frontend | HTML + CSS + Vanilla JS |
+| Backend | Google Apps Script |
+| Database | Google Sheets |
+| File Storage | Google Drive |
+| Hosting | Apps Script Web App |
+
+---
+
+## 📂 Project Structure
+
+
