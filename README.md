@@ -72,3 +72,16 @@ SAO-App/
 └── README.md
 
 
+---
+
+## ⚙️ Setup Guide
+
+Follow steps **exactly**.
+
+---
+
+# 1️⃣ Google Sheet Setup
+
+Create a new Google Spreadsheet.
+
+### Rename spreadsheet:
