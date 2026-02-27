@@ -65,4 +65,10 @@ Google Drive (Image Storage)
 
 ## 📂 Project Structure
 
+SAO-App/
+│
+├── code.gs # Backend logic
+├── index.html # UI + client logic
+└── README.md
+
 
