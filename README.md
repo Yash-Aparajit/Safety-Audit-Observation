@@ -39,3 +39,13 @@ Designed for **industrial environments**, optimized for **speed, clarity, and ze
 ---
 
 ## 🏗 System Architecture
+
+Operator (Mobile)
+↓
+Apps Script Web App
+↓
+Google Sheets (Database)
+↓
+Google Drive (Image Storage)
+
+
