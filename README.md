@@ -85,3 +85,54 @@ Follow steps **exactly**.
 Create a new Google Spreadsheet.
 
 ### Rename spreadsheet:
+SAO System
+
+### Create Sheet:  
+SAO_Log
+
+
+---
+
+### Add Header Row (Row 1)
+
+| Column | Header |
+|---|---|
+| A | Timestamp |
+| B | Plant |
+| C | Line |
+| D | Line Location/Area |
+| E | Shift |
+| F | Auditor Name |
+| G | Supervisor Name |
+| H | Observation Type |
+| I | Injury Point |
+| J | Employee Name |
+| K | Employee Contractor |
+| L | Root Cause |
+| M | Action Taken |
+| N | NC Observation Remark |
+| O | Image Link |
+| P | Image Preview |
+| Q | Responsibility |
+| R | Action Plan |
+| S | Target Date |
+| T | Status |
+
+---
+
+# 2️⃣ Google Drive Setup (Image Storage)
+
+### Step 1
+Create folder in Google Drive:
+SAO Images
+
+
+### Step 2
+Open folder → copy Folder ID from URL:
+
+
+### Step 3
+Paste into `code.gs`:
+
+```javascript
+const IMAGE_FOLDER_ID = "PASTE_FOLDER_ID_HERE";
