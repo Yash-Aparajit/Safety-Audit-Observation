@@ -173,6 +173,7 @@ function saveEntry(form)
 
       form.type,
 
+      form.injuryType,
       form.injuryPoint,
       form.empName,
       form.empContract,
