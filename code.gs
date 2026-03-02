@@ -163,6 +163,7 @@ function saveEntry(form)
       new Date(),
       form.auditDate,
       form.plant,
+      form.department,
       form.line,
       form.area,
       form.shift,
