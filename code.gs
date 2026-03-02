@@ -188,7 +188,8 @@ function saveEntry(form)
       form.responsibility,
       form.actionPlan,
       form.targetDate,
-      form.status
+      form.status,
+      form.kaizen,
 
     ]);
 
