@@ -125,6 +125,20 @@ function saveImage(base64)
   return file.getId();
 }
 
+function getSafetyMetrics(){
+
+const sh = SpreadsheetApp.getActive()
+.getSheetByName("MASTER");
+
+const data = sh.getRange(1,1,4,2).getValues();
+
+return {
+injuryFreeDays: data[1][1],
+lti: data[2][1],
+ltiIncident: data[3][1]
+};
+
+}
 
 
 /* SAVE ENTRY */
