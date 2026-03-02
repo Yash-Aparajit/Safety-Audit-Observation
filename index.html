@@ -143,8 +143,10 @@ opacity:1;
 
 <div class="card">
 
-<label>Plant</label>
+<label>Audit Date</label>
+<input type="date" id="auditDate">
 
+<label>Plant</label>
 <select id="plant">
 <option value="">--select--</option>
 </select>
@@ -400,6 +402,7 @@ function submit(base64)
 
 const form={
 
+auditDate: auditDate.value,
 plant:plant.value,
 line:line.value,
 area:area.value,
@@ -510,6 +513,10 @@ firstAidDiv.classList.add("hidden");
 
 }
 
+const today = new Date().toISOString().split("T")[0];
+
+auditDate.value = today;
+auditDate.max = today;   
 
 google.script.run
 .withSuccessHandler(data=>{
