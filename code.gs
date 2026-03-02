@@ -1,5 +1,5 @@
 const LOG_SHEET = "SAO_Log";
-const IMAGE_FOLDER_ID = "Your Image Folder ID.";
+const IMAGE_FOLDER_ID = "1bwL8oiHJgsl3_t71_7z_sCsHBL9TOhH2";
 
 
 function doGet()
@@ -19,13 +19,81 @@ function getMaster()
     plants:[
       "Plant_1",
       "Plant_2",
-      "Plant_3" //So on
+      "Plant_New"
     ],
 
     lines:[
-"Line 1",
-"Line 2",
-"Line 3" //Fill in the name of the line you want to monitor. 
+"JL LH COVER",
+"K1/K3 LH COVER",
+"INTAKE MANIFOLD",
+"KTM LH COVER",
+"DUKE MY24 INDICATOR LH - RH",
+"K8 Tail Lamp",
+"K8 - STRUCTURE",
+"K10 - BACK COVER",
+"K8 SPEEDO FLAP SUB ASSLY",
+"SENSOR CABLE",
+"KTM Sensor cable",
+"ADVENTURE HOLDER INDICATOR LH/RH",
+"DUKE PLATE HOLDER ASSLY",
+"DUKE MY24 SPEEDOMETER",
+"K17 B Speedometer",
+"KTM Wheel",
+"COUPLER ASSLY",
+"K17 AB Seat Cowl",
+"K17 B/E Seat Cowl",
+"K17 B/E Belly Pan",
+"Brake kit",
+"Oil cooler",
+"JL/K10 - RADIATOR",
+"KTM Radiator",
+"NS 400 Radiator Cowl",
+"JL Fairing",
+"K8 Fairing",
+"DUKE FAIRING",
+"RC Fairing (KTM)",
+"K1 Fairing",
+"K17 B/E Fairing",
+"ADVENTURE FAIRING",
+"K3 Fairing",
+"NS 400 Fairing",
+"SMC/ENDURO FAIRING",
+"THRUXTON FAIRING",
+"ADV FRONT FAIRING CARRIER MASK",
+"K17 B/E Fr Fender",
+"K17 AB Fr Fender",
+"KTM/K10 - THERMOSTAT",
+"SUMP GUARD WITH EXP. TANK (TRIUMPH)",
+"COVER REAR RH (TRIUMPH)",
+"THRUXTON THROTTLE BODY LH/RH",
+"TRIUMPH HEADLAMP HOLDER",
+"FORK",
+"HANDLE",
+"KTM STEP HOLDER RIDER RH + PILLION LH&RH",
+"STEP HOLDER RIDER LH WITH SIDE STAND ASSLY",
+"K4/K11 STEP HOLDER RH",
+"K10 STEP HOLDER ASSLY",
+"K17 STEP HOLDER ASSLY",
+"K8 STEP HOLDER ASSLY",
+"K17 A STEP HOLDER ASSLY",
+"TRIUMPH STEP HOLDER",
+"ADVENTURE CENTER STAND",
+"KTM HARNESS ASSLY",
+"KTM REAR FENDER ASSLY",
+"K17 B/D REAR NO. PLATE ASSLY",
+"K17 A REAR NO. PLATE ASSLY",
+"TRIUMPH REAR FENDER",
+"HUSQ. Gen03 RR FENDER ASSLY",
+"K4G REAR NO. PLATE",
+"TRIUMPH UNDER TRAY",
+"ADVENTURE UNDER TRAY",
+"HUSQ. Gen03 TAIL LAMP",
+"HUSQ. Gen03 HEADLAMP STRUCTURE",
+"HUSQ. Gen03 BRACKET LATCH",
+"THRUXTON SOCKET CHARGER",
+"KTM ENG. HANGER ASSLY",
+"SMC/ENDURO FR FAIRING BACK COVER",
+"K11 Cowl and Shroud assly"
     ]
 
   };
@@ -93,7 +161,7 @@ function saveEntry(form)
     sh.appendRow([
 
       new Date(),
-
+      form.auditDate,
       form.plant,
       form.line,
       form.area,
