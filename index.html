@@ -276,6 +276,9 @@ opacity:1;
 <label>Status</label>
 <input id="status" value="Open">
 
+<label>Scope for Kaizen</label>
+<input id="kaizen" placeholder="--NA--">
+
 
 <button class="save" onclick="save()">Submit Observation</button>
 
@@ -421,6 +424,9 @@ submit("");
 function submit(base64)
 {
 
+const kaizenValue =
+kaizen.value.trim()=="" ? "--NA--" : kaizen.value;
+
 const form={
 
 auditDate: auditDate.value,
@@ -450,7 +456,8 @@ image:base64,
 responsibility:responsibility.value,
 actionPlan:actionPlan.value,
 targetDate:targetDate.value,
-status:status.value
+status:status.value,
+kaizen: kaizenValue
 
 };
 
