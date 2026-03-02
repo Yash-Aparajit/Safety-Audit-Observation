@@ -40,6 +40,49 @@ color:white;
 margin-bottom:10px;
 }
 
+/* ===== METRIC CARDS (MATCH FORM CARDS) ===== */
+
+.metrics{
+display:flex;
+gap:14px;
+margin:18px 0 6px 0;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.metric{
+background:#ffffff;
+padding:12px 16px;
+border-radius:14px;
+text-align:center;
+min-width:120px;
+
+border-top:4px solid #007a3d;   /* safety green accent */
+
+box-shadow:0 6px 18px rgba(0,0,0,0.12);
+
+transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.metric:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 24px rgba(0,0,0,0.18);
+}
+
+.metric span{
+font-size:26px;
+font-weight:600;
+color:#007a3d;
+display:block;
+letter-spacing:.3px;
+}
+
+.metric small{
+font-size:12px;
+color:#444;
+font-weight:500;
+}
+
 .title{
 font-size:28px;
 font-weight:600;
@@ -140,6 +183,24 @@ opacity:1;
 <div class="title">Safety Audit Observation</div>
 </div>
 
+<div class="metrics">
+
+  <div class="metric">
+    <span id="injuryFree">--</span>
+    <small>Injury Free Days</small>
+  </div>
+
+  <div class="metric">
+    <span id="ltiValue">--</span>
+    <small>Lost Time Injury %</small>
+  </div>
+
+  <div class="metric">
+    <span id="ltiIncident">--</span>
+    <small>Lost Time Incident %</small>
+  </div>
+
+</div>
 
 <div class="card">
 
@@ -567,6 +628,16 @@ lineList.appendChild(opt);
 
 })
 .getMaster();
+
+/* LOAD SAFETY METRICS */
+
+google.script.run.withSuccessHandler(m=>{
+
+injuryFree.innerText = m.injuryFreeDays;
+ltiValue.innerText = m.lti + "%";
+ltiIncident.innerText = m.ltiIncident + "%";
+
+}).getSafetyMetrics();
 
 </script>
 
