@@ -151,6 +151,24 @@ opacity:1;
 <option value="">--select--</option>
 </select>
 
+<label>Department</label>
+
+<select id="department">
+<option value="">--select--</option>
+<option>Assembly Prod.</option>
+<option>CKD Hardware</option>
+<option>Store</option>
+<option>Quality</option>
+<option>HR & Admin</option>
+<option>Purchase</option>
+<option>ME</option>
+<option>Maintenance</option>
+<option>Security</option>
+<option>Safety</option>
+<option>Management</option>
+<option>QMS</option>
+<option>AI</option>
+</select>
 
 <label>Line</label>
 
@@ -159,7 +177,7 @@ opacity:1;
 <datalist id="lineList"></datalist>
 
 
-<label>Line Location/Area</label>
+<label>Location/Area</label>
 
 <input id="area">
 
@@ -404,6 +422,7 @@ const form={
 
 auditDate: auditDate.value,
 plant:plant.value,
+department: department.value,
 line:line.value,
 area:area.value,
 shift:selectedShift,
