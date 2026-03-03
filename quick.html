@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -23,6 +25,13 @@ max-width:480px;
 padding:20px;
 }
 
+.hindi{
+font-family:'Noto Sans Devanagari',sans-serif;
+font-size:16px;
+font-weight:500;
+opacity:0.85;
+}
+
 .header{
 text-align:center;
 margin-bottom:20px;
@@ -31,6 +40,7 @@ margin-bottom:20px;
 .header h2{
 margin:0;
 font-weight:600;
+font-size:26px;
 }
 
 .line-box{
@@ -43,7 +53,7 @@ text-align:center;
 }
 
 .line-box strong{
-font-size:18px;
+font-size:22px;
 color:#007a3d;
 display:block;
 }
@@ -66,7 +76,7 @@ border-radius:18px;
 padding:22px;
 text-align:center;
 box-shadow:0 8px 20px rgba(0,0,0,0.08);
-font-size:48px;
+font-size:58px;
 cursor:pointer;
 transition:all .2s ease;
 min-height:120px;
@@ -77,8 +87,8 @@ justify-content:center;
 
 .tile span{
 display:block;
-font-size:14px;
-margin-top:8px;
+font-size:18px;
+margin-top:10px;
 font-weight:600;
 }
 
@@ -87,7 +97,13 @@ transform:scale(.96);
 }
 
 .selected{
-border:3px solid #007a3d;
+background:#007a3d;
+color:white;
+transform:scale(.97);
+}
+
+.selected span{
+color:white;
 }
 
 .submit{
@@ -125,6 +141,8 @@ display:none;
 <h2>Safety Alert</h2>
 </div>
 
+
+  
 <div class="line-box">
 <strong id="lineName"></strong>
 <div class="time" id="timeStamp"></div>
@@ -133,13 +151,37 @@ display:none;
 
 <div class="grid">
 
-<div class="tile" onclick="selectType(this,'Unsafe Act')">⚠️<span>Unsafe Act</span></div>
+<div class="tile" onclick="selectType(this,'Unsafe Act')">
+⚠️
+<span>
+Unsafe Act
+<span class="hindi">अनसेफ एक्ट</span>
+</span>
+</div>
 
-<div class="tile" onclick="selectType(this,'Unsafe Condition')">🧯<span>Unsafe Condition</span></div>
+<div class="tile" onclick="selectType(this,'Unsafe Condition')">
+⚠️
+<span>
+Unsafe Condition
+<span class="hindi">अनसेफ कंडीशन</span>
+</span>
+</div>
 
-<div class="tile" onclick="selectType(this,'Near Miss')">😟<span>Near Miss</span></div>
+<div class="tile" onclick="selectType(this,'Near Miss')">
+⚠️
+<span>
+Near Miss
+<span class="hindi">नियर मिस</span>
+</span>
+</div>
 
-<div class="tile" onclick="selectType(this,'First Aid')">🤕<span>First Aid</span></div>
+<div class="tile" onclick="selectType(this,'First Aid')">
+🤕
+<span>
+First Aid
+<span class="hindi">फर्स्ट एड</span>
+</span>
+</div>
 
 </div>
 
@@ -151,6 +193,8 @@ display:none;
 
 <script>
 
+
+  
 const LINE = "<?= line ?>";
 const PLANT = "<?= plant ?>";
 
@@ -181,6 +225,8 @@ alert("Please select type");
 return;
 }
 
+
+  
 const btn = document.querySelector(".submit");
 btn.disabled = true;
 btn.innerText = "Sending...";
@@ -212,7 +258,10 @@ type:selectedType
 
 }
 
+  
 </script>
 
+
+  
 </body>
 </html>
