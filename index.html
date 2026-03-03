@@ -17,9 +17,8 @@ margin:0;
 font-family:'Poppins',sans-serif;
 
 background-image:
-linear-gradient(rgba(255,255,255,0.30), rgba(255,255,255,0.30)),
-url("https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg");
-
+your link here
+  
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
@@ -45,28 +44,31 @@ margin-bottom:10px;
 .metrics{
 display:flex;
 gap:14px;
-margin:18px 0 6px 0;
+margin:15px 0 15px 0;
 justify-content:center;
 flex-wrap:wrap;
 }
 
 .metric{
-background:#ffffff;
-padding:12px 16px;
-border-radius:14px;
+background:rgba(255,255,255,0.96);   
+padding:20px;
+border-radius:16px;
 text-align:center;
-min-width:120px;
 
-border-top:4px solid #007a3d;   /* safety green accent */
+min-width:150px;
+flex:1;
+max-width:160px;
 
-box-shadow:0 6px 18px rgba(0,0,0,0.12);
+border-top:4px solid #007a3d;
+
+box-shadow:0 8px 30px rgba(0,0,0,0.15);
 
 transition:transform .2s ease, box-shadow .2s ease;
 }
 
 .metric:hover{
 transform:translateY(-3px);
-box-shadow:0 10px 24px rgba(0,0,0,0.18);
+box-shadow:0 12px 30px rgba(0,0,0,0.18);
 }
 
 .metric span{
@@ -78,7 +80,7 @@ letter-spacing:.3px;
 }
 
 .metric small{
-font-size:12px;
+font-size:14px;
 color:#444;
 font-weight:500;
 }
@@ -192,12 +194,12 @@ opacity:1;
 
   <div class="metric">
     <span id="ltiValue">--</span>
-    <small>Lost Time Injury %</small>
+    <small>Lost Time Injury</small>
   </div>
 
   <div class="metric">
     <span id="ltiIncident">--</span>
-    <small>Lost Time Incident %</small>
+    <small>Lost Time Incident</small>
   </div>
 
 </div>
@@ -206,6 +208,9 @@ opacity:1;
 
 <label>Audit Date</label>
 <input type="date" id="auditDate">
+
+<label>Incident Code (Worker Alert Code)</label>
+<input id="incidentCodeField" placeholder="Optional">
 
 <label>Plant</label>
 <select id="plant">
@@ -216,9 +221,9 @@ opacity:1;
 
 <select id="department">
 <option value="">--select--</option>
-<option>Your</option>
-<option>Options</option>
-<option>Here</option>
+<option>Option 1</option>
+<option>Option 2</option>
+<option>Option 3</option>
 </select>
 
 <label>Line</label>
@@ -481,6 +486,7 @@ kaizen.value.trim()=="" ? "--NA--" : kaizen.value;
 const form={
 
 auditDate: auditDate.value,
+incidentCode: incidentCodeField.value.trim(),
 plant:plant.value,
 department: department.value,
 line:line.value,
@@ -507,7 +513,7 @@ image:base64,
 responsibility:responsibility.value,
 actionPlan:actionPlan.value,
 targetDate:targetDate.value,
-status:status.value,
+status: document.getElementById("status").value || "Open",
 kaizen: kaizenValue
 
 };
