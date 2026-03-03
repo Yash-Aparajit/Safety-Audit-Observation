@@ -1,5 +1,5 @@
 const LOG_SHEET = "SAO_Log";
-const IMAGE_FOLDER_ID = "Your Link";
+const IMAGE_FOLDER_ID = "Your   ID here";
 
 
 function doGet(e)
@@ -28,13 +28,15 @@ function getMaster()
     plants:[
       "Plant_1",
       "Plant_2",
+
+
     ],
 
     lines:[
-"Option 1"
-"Option 2"
-"Option 3 "
-]
+"Line 1",
+"Line 2",
+"Line 3"
+    ]
 
   };
 
@@ -156,15 +158,19 @@ function saveQuickAlert(data)
           </tr>
         </table>
 
+
+
         <div style="margin-top:20px;text-align:center;">
-          <a href="https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?mode=sao&incident=${code}"
+          <a href="https://script.google.com/macros/s/Your ID Here/exec?mode=sao&incident=${code}"
             style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
             Open Investigation Form
           </a>
         </div>
 
-        <p style="margin-top:25px;font-size:12px;color:#777;">
-          Please investigate and complete corrective action at the earliest.
+        <hr style="margin-top:30px;border:none;border-top:1px solid #ddd;">
+
+        <p style="font-size:12px;color:#888;text-align:center;margin-top:10px;">
+        Please investigate at the earliest, and This is a system generated safety alert. Please do not reply to this email. 
         </p>
 
       </div>
@@ -174,8 +180,11 @@ function saveQuickAlert(data)
   </div>
   `;
 
+
+
+
   MailApp.sendEmail({
-    to: "Your Mail Adress Here",
+    to: "Your Email Here",
     subject: subject,
     htmlBody: htmlBody
   });
@@ -261,6 +270,8 @@ function saveEntry(form)
     lock.releaseLock();
   }
 }
+
+
 
 
 function closeQuickAlert(code)
