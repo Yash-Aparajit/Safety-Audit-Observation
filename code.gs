@@ -1,5 +1,5 @@
 const LOG_SHEET = "SAO_Log";
-const IMAGE_FOLDER_ID = "Your   ID here";
+const IMAGE_FOLDER_ID = "Your ID here";
 
 
 function doGet(e)
@@ -18,7 +18,6 @@ function doGet(e)
     .createHtmlOutputFromFile("index")
     .setTitle("Safety Audit Observation");
 }
-
 
 /* MASTER DATA */
 function getMaster()
@@ -41,8 +40,6 @@ function getMaster()
   };
 
 }
-
-
 
 /* SAVE IMAGE */
 function saveImage(base64)
@@ -158,8 +155,6 @@ function saveQuickAlert(data)
           </tr>
         </table>
 
-
-
         <div style="margin-top:20px;text-align:center;">
           <a href="https://script.google.com/macros/s/Your ID Here/exec?mode=sao&incident=${code}"
             style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
@@ -179,9 +174,6 @@ function saveQuickAlert(data)
 
   </div>
   `;
-
-
-
 
   MailApp.sendEmail({
     to: "Your Email Here",
@@ -221,7 +213,6 @@ function saveEntry(form)
       preview=
       '=IMAGE("https://drive.google.com/uc?id='+id+'",4,120,120)';
     }
-
 
     sh.appendRow([
 
@@ -270,9 +261,6 @@ function saveEntry(form)
     lock.releaseLock();
   }
 }
-
-
-
 
 function closeQuickAlert(code)
 {
