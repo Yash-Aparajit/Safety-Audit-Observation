@@ -225,7 +225,6 @@ opacity:1;
 <option>Option 2</option>
 <option>Option 3</option>
 
-
 </select>
 
 <label>Line</label>
@@ -262,8 +261,6 @@ opacity:1;
 
 </div>
 
-
-
 <div class="card">
 
 <label>Observation Type</label>
@@ -298,8 +295,6 @@ opacity:1;
 
 </div>
 
-
-
 <div class="card">
 
 <label>NC Observation Remark</label>
@@ -314,7 +309,6 @@ opacity:1;
 <img id="preview">
 
 </div>
-
 
 
 <div class="card">
@@ -383,7 +377,6 @@ firstAidDiv.classList.remove("hidden");
 }
 
 
-
 image.onchange=function(){
 
 const reader=new FileReader();
@@ -394,11 +387,7 @@ preview.src=reader.result;
 
 reader.readAsDataURL(image.files[0]);
 
-};
-
-
-
-  
+};  
 
 let fadeTimer=null;
 
@@ -416,8 +405,6 @@ fadeTimer=setTimeout(()=>{
 msg.classList.remove("show");
 },8000);
 }
-
-
 
 function save()
 {
@@ -479,7 +466,6 @@ submit("");
 }
 
 }
-
 
 function submit(base64)
 {
@@ -559,9 +545,6 @@ btn.innerText="Submit Observation";
 
 }
 
-
-
-  
 function resetForm()
 {
 
@@ -631,8 +614,6 @@ lineList.appendChild(opt);
 })
 .getMaster();
 
-
-  
 /* LOAD SAFETY METRICS */
 
 google.script.run.withSuccessHandler(m=>{
