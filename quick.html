@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#f4f6f8;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:100%;
+max-width:480px;
+padding:20px;
+}
+
+.header{
+text-align:center;
+margin-bottom:20px;
+}
+
+.header h2{
+margin:0;
+font-weight:600;
+}
+
+.line-box{
+background:white;
+padding:14px;
+border-radius:14px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+margin-bottom:18px;
+text-align:center;
+}
+
+.line-box strong{
+font-size:18px;
+color:#007a3d;
+display:block;
+}
+
+.time{
+font-size:12px;
+color:#666;
+margin-top:4px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.tile{
+background:white;
+border-radius:18px;
+padding:22px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+font-size:48px;
+cursor:pointer;
+transition:all .2s ease;
+min-height:120px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.tile span{
+display:block;
+font-size:14px;
+margin-top:8px;
+font-weight:600;
+}
+
+.tile:active{
+transform:scale(.96);
+}
+
+.selected{
+border:3px solid #007a3d;
+}
+
+.submit{
+margin-top:20px;
+width:100%;
+padding:16px;
+border:none;
+border-radius:16px;
+background:#007a3d;
+color:white;
+font-size:16px;
+font-weight:600;
+}
+
+.submit:disabled{
+background:#aaa;
+}
+
+.success{
+margin-top:18px;
+text-align:center;
+font-weight:600;
+color:#007a3d;
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h2>Safety Alert</h2>
+</div>
+
+<div class="line-box">
+<strong id="lineName"></strong>
+<div class="time" id="timeStamp"></div>
+<div class="time" id="incidentCode"></div>
+</div>
+
+<div class="grid">
+
+<div class="tile" onclick="selectType(this,'Unsafe Act')">⚠️<span>Unsafe Act</span></div>
+
+<div class="tile" onclick="selectType(this,'Unsafe Condition')">🧯<span>Unsafe Condition</span></div>
+
+<div class="tile" onclick="selectType(this,'Near Miss')">😟<span>Near Miss</span></div>
+
+<div class="tile" onclick="selectType(this,'First Aid')">🤕<span>First Aid</span></div>
+
+</div>
+
+<button class="submit" onclick="submitAlert()">Send Alert</button>
+
+<div class="success" id="successMsg"></div>
+
+</div>
+
+<script>
+
+const LINE = "<?= line ?>";
+const PLANT = "<?= plant ?>";
+
+let selectedType="";
+let generatedCode="";
+
+lineName.innerText = LINE;
+
+function updateTime(){
+const now=new Date();
+timeStamp.innerText=now.toLocaleString("en-GB");
+}
+updateTime();
+
+function selectType(el,type){
+
+document.querySelectorAll(".tile")
+.forEach(t=>t.classList.remove("selected"));
+
+el.classList.add("selected");
+selectedType=type;
+}
+
+function submitAlert(){
+
+if(!selectedType){
+alert("Please select type");
+return;
+}
+
+const btn = document.querySelector(".submit");
+btn.disabled = true;
+btn.innerText = "Sending...";
+
+google.script.run
+.withSuccessHandler(function(code){
+
+generatedCode = code;
+
+successMsg.style.display = "block";
+successMsg.innerHTML = "✔ Alert Sent<br>Ref: " + code;
+
+btn.innerText = "Sent ✔";
+
+setTimeout(()=>{
+  btn.disabled = false;
+  btn.innerText = "Send Alert";
+  selectedType = "";
+  document.querySelectorAll(".tile")
+    .forEach(t=>t.classList.remove("selected"));
+}, 4000);
+
+})
+.saveQuickAlert({
+plant:PLANT,
+line:LINE,
+type:selectedType
+});
+
+}
+
+</script>
+
+</body>
+</html>
