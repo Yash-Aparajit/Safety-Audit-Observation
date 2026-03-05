@@ -150,7 +150,7 @@ display:none;
 <div class="grid">
 
 <div class="tile" onclick="selectType(this,'Unsafe Act')">
-⚠️
+❗
 <span>
 Unsafe Act
 <span class="hindi">अनसेफ एक्ट</span>
@@ -166,7 +166,7 @@ Unsafe Condition
 </div>
 
 <div class="tile" onclick="selectType(this,'Near Miss')">
-⚠️
+😰
 <span>
 Near Miss
 <span class="hindi">नियर मिस</span>
@@ -221,6 +221,7 @@ alert("Please select type");
 return;
 }
 
+  
 const btn = document.querySelector(".submit");
 btn.disabled = true;
 btn.innerText = "Sending...";
@@ -251,7 +252,9 @@ type:selectedType
 });
 
 }
+
+  
 </script>
- 
+
 </body>
 </html>
