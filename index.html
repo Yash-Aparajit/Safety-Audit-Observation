@@ -17,7 +17,7 @@ margin:0;
 font-family:'Poppins',sans-serif;
 
 background-image:
-url("https://drive.google.com/thumbnail?id=YOUR ID HERE");
+url("YOUR LINK HERE");
 
 background-size:cover;
 background-position:center;
@@ -221,10 +221,9 @@ opacity:1;
 
 <select id="department">
 <option value="">--select--</option>
-<option>Option 1</option>
-<option>Option 2</option>
-<option>Option 3</option>
-
+<option>Dept. 1</option>
+<option>Dept. 2</option>
+<option>Dept. 3</option>
 </select>
 
 <label>Line</label>
@@ -261,6 +260,8 @@ opacity:1;
 
 </div>
 
+
+
 <div class="card">
 
 <label>Observation Type</label>
@@ -295,6 +296,8 @@ opacity:1;
 
 </div>
 
+
+
 <div class="card">
 
 <label>NC Observation Remark</label>
@@ -309,6 +312,7 @@ opacity:1;
 <img id="preview">
 
 </div>
+
 
 
 <div class="card">
@@ -347,6 +351,8 @@ let selectedShift="";
 let selectedType="";
 let isSaving=false;
 
+const INCIDENT_FROM_URL = "<?= incident ?>";
+
 
 function setShift(btn){
 
@@ -377,6 +383,7 @@ firstAidDiv.classList.remove("hidden");
 }
 
 
+
 image.onchange=function(){
 
 const reader=new FileReader();
@@ -387,7 +394,9 @@ preview.src=reader.result;
 
 reader.readAsDataURL(image.files[0]);
 
-};  
+};
+
+
 
 let fadeTimer=null;
 
@@ -405,6 +414,8 @@ fadeTimer=setTimeout(()=>{
 msg.classList.remove("show");
 },8000);
 }
+
+
 
 function save()
 {
@@ -466,6 +477,7 @@ submit("");
 }
 
 }
+
 
 function submit(base64)
 {
@@ -545,6 +557,7 @@ btn.innerText="Submit Observation";
 
 }
 
+
 function resetForm()
 {
 
@@ -557,6 +570,8 @@ area.value="";
 auditor.value="";
 
 supervisor.value="";
+
+incidentCodeField.value="";
 
 remark.value="";
 
@@ -590,9 +605,33 @@ firstAidDiv.classList.add("hidden");
 }
 
 const today = new Date().toISOString().split("T")[0];
-
 auditDate.value = today;
 auditDate.max = today;   
+
+if(INCIDENT_FROM_URL){
+  document.getElementById("incidentCodeField").value = INCIDENT_FROM_URL;
+}
+
+if(INCIDENT_FROM_URL)
+{
+  google.script.run
+  .withSuccessHandler(function(d){
+
+    if(!d) return;
+
+    plant.value = d.plant;
+    line.value = d.line;
+
+    document.querySelectorAll(".type").forEach(el=>{
+      if(el.innerText === d.type){
+        setType(el);
+      }
+    });
+
+  })
+  .getAlertDetails(INCIDENT_FROM_URL);
+}
+
 
 google.script.run
 .withSuccessHandler(data=>{
@@ -624,6 +663,7 @@ ltiIncident.innerText = m.ltiIncident + "%";
 
 }).getSafetyMetrics();
 
+  
 </script>
 
 </body>
