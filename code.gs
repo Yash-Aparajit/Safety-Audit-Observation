@@ -1,5 +1,5 @@
 const LOG_SHEET = "SAO_Log";
-const IMAGE_FOLDER_ID = "Your ID here";
+const IMAGE_FOLDER_ID = "YOUR LINK (ID) HERE";
 
 
 function doGet(e)
@@ -14,10 +14,18 @@ function doGet(e)
     return t.evaluate().setTitle("Quick Safety Alert");
   }
 
+  if(mode === "sao")
+  {
+    const t = HtmlService.createTemplateFromFile("index");
+    t.incident = e.parameter.incident || "";
+    return t.evaluate().setTitle("Safety Audit Observation");
+  }
+
   return HtmlService
     .createHtmlOutputFromFile("index")
     .setTitle("Safety Audit Observation");
 }
+
 
 /* MASTER DATA */
 function getMaster()
@@ -27,19 +35,19 @@ function getMaster()
     plants:[
       "Plant_1",
       "Plant_2",
-
-
+      "Plant_New"
     ],
 
     lines:[
-"Line 1",
-"Line 2",
-"Line 3"
+"OPTION 1",
+"OPTION 2",
+"OPTION 3"
     ]
 
   };
 
 }
+
 
 /* SAVE IMAGE */
 function saveImage(base64)
@@ -156,7 +164,7 @@ function saveQuickAlert(data)
         </table>
 
         <div style="margin-top:20px;text-align:center;">
-          <a href="https://script.google.com/macros/s/Your ID Here/exec?mode=sao&incident=${code}"
+          <a href="https://script.google.com/macros/s/YOUR ID HERE/exec?mode=sao&incident=${code}"
             style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
             Open Investigation Form
           </a>
@@ -176,12 +184,37 @@ function saveQuickAlert(data)
   `;
 
   MailApp.sendEmail({
-    to: "Your Email Here",
+    to: "YOUR MAIL ID HERE",
     subject: subject,
     htmlBody: htmlBody
   });
 
   return code;
+}
+
+function getAlertDetails(code)
+{
+  if(!code) return null;
+
+  const sh = SpreadsheetApp
+    .getActive()
+    .getSheetByName("Quick_Alerts");
+
+  const data = sh.getDataRange().getValues();
+
+  for(let i=1;i<data.length;i++)
+  {
+    if(data[i][1] === code)
+    {
+      return {
+        plant:data[i][2],
+        line:data[i][3],
+        type:data[i][4]
+      };
+    }
+  }
+
+  return null;
 }
 
 /* SAVE ENTRY */
@@ -213,6 +246,7 @@ function saveEntry(form)
       preview=
       '=IMAGE("https://drive.google.com/uc?id='+id+'",4,120,120)';
     }
+
 
     sh.appendRow([
 
@@ -261,6 +295,7 @@ function saveEntry(form)
     lock.releaseLock();
   }
 }
+
 
 function closeQuickAlert(code)
 {
