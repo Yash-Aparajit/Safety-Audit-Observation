@@ -1,5 +1,5 @@
 const LOG_SHEET = "SAO_Log";
-const IMAGE_FOLDER_ID = "YOUR LINK (ID) HERE";
+const IMAGE_FOLDER_ID = "YOUR ID HERE";
 
 
 function doGet(e)
@@ -35,18 +35,19 @@ function getMaster()
     plants:[
       "Plant_1",
       "Plant_2",
-      "Plant_New"
+      "Plant_3"
     ],
 
     lines:[
-"OPTION 1",
-"OPTION 2",
-"OPTION 3"
+"Option 3",
+"Option 2",
+"Option 1",
     ]
 
   };
 
 }
+
 
 
 /* SAVE IMAGE */
@@ -164,7 +165,7 @@ function saveQuickAlert(data)
         </table>
 
         <div style="margin-top:20px;text-align:center;">
-          <a href="https://script.google.com/macros/s/YOUR ID HERE/exec?mode=sao&incident=${code}"
+          <a href="YOUR LINK ID HERE?mode=sao&incident=${code}"
             style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
             Open Investigation Form
           </a>
@@ -184,7 +185,7 @@ function saveQuickAlert(data)
   `;
 
   MailApp.sendEmail({
-    to: "YOUR MAIL ID HERE",
+    to: "yash.aparajit@schnellecke-jeena.co.in",
     subject: subject,
     htmlBody: htmlBody
   });
@@ -287,6 +288,8 @@ function saveEntry(form)
     sh.setRowHeight(sh.getLastRow(),130);
     closeQuickAlert(form.incidentCode);
 
+    sendSAOEmail(form, link);
+
     return true;
 
   }
@@ -315,4 +318,82 @@ function closeQuickAlert(code)
       break;
     }
   }
+}
+
+
+function sendSAOEmail(form, imageLink)
+{
+
+const subject =
+`SAO Report Submitted | ${form.line} | ${form.type}`;
+
+const html = `
+<div style="font-family:Arial;background:#f4f6f8;padding:20px">
+
+<div style="max-width:650px;margin:auto;background:white;border-radius:10px;padding:20px">
+
+<h2 style="color:#007a3d">Safety Audit Observation Report</h2>
+
+<table style="width:100%;border-collapse:collapse">
+
+<tr>
+<td style="padding:8px;font-weight:bold">Incident Code</td>
+<td style="padding:8px">${form.incidentCode || "Manual Entry"}</td>
+</tr>
+
+<tr>
+<td style="padding:8px;font-weight:bold">Plant</td>
+<td style="padding:8px">${form.plant}</td>
+</tr>
+
+<tr>
+<td style="padding:8px;font-weight:bold">Line</td>
+<td style="padding:8px">${form.line}</td>
+</tr>
+
+<tr>
+<td style="padding:8px;font-weight:bold">Observation Type</td>
+<td style="padding:8px">${form.type}</td>
+</tr>
+
+<tr>
+<td style="padding:8px;font-weight:bold">Auditor</td>
+<td style="padding:8px">${form.auditor}</td>
+</tr>
+
+<tr>
+<td style="padding:8px;font-weight:bold">Remark</td>
+<td style="padding:8px">${form.remark}</td>
+</tr>
+
+<tr>
+<td style="padding:8px;font-weight:bold">Action Plan</td>
+<td style="padding:8px">${form.actionPlan}</td>
+</tr>
+
+<tr>
+<td style="padding:8px;font-weight:bold">Target Date</td>
+<td style="padding:8px">${form.targetDate}</td>
+</tr>
+
+</table>
+
+${imageLink ? `<p><a href="${imageLink}">View Image</a></p>` : ""}
+
+<hr>
+
+<p style="font-size:12px;color:#888">
+System generated report. Do not reply.
+</p>
+
+</div>
+</div>
+`;
+
+MailApp.sendEmail({
+to:"YOUR EMAIL HERE",
+subject:subject,
+htmlBody:html
+});
+
 }
