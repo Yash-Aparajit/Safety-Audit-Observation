@@ -17,7 +17,7 @@ margin:0;
 font-family:'Poppins',sans-serif;
 
 background-image:
-url("Your URL HERE");
+url("Your ULR Here");
 
 background-size:cover;
 background-position:center;
@@ -149,14 +149,13 @@ color:white;
 }
 
 .save{
-margin-top:20px;
-padding:14px;
-width:100%;
+flex:1;
+height:48px;
 border:none;
 border-radius:12px;
 background:#00C853;
 color:white;
-font-size:17px;
+font-size:16px;
 font-weight:600;
 }
 
@@ -173,6 +172,58 @@ opacity:1;
 
 .hidden{display:none;}
 
+/* ===== WIZARD PROGRESS ===== */
+
+.wizard-progress{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 10px;
+margin-bottom:10px;
+}
+
+.wizard-progress{
+background:rgba(255,255,255,0.96);
+box-shadow:0 8px 30px rgba(0,0,0,0.15);
+}
+
+.wizard-step{
+flex:1;
+text-align:center;
+opacity:0.5;
+transition:all .3s ease;
+}
+
+.wizard-step .dot{
+width:12px;
+height:12px;
+border-radius:50%;
+background:#bbb;
+margin:auto;
+margin-bottom:6px;
+transition:all .3s ease;
+}
+
+.wizard-step .label{
+font-size:12px;
+font-weight:500;
+}
+
+.wizard-step.active{
+opacity:1;
+}
+
+.wizard-step.active .dot{
+width:18px;
+height:18px;
+background:#007a3d;
+}
+
+.wizard-step.active .label{
+font-weight:600;
+color:#007a3d;
+}
+
 .step{display:none;}
 .step.active{display:block;}
 
@@ -185,13 +236,13 @@ gap:10px;
 
 .wizard-btn{
 flex:1;
-padding:14px;
+height:48px;
 border:none;
-border-radius:10px;
-background:#1565C0;
+border-radius:12px;
+background:#777;
 color:white;
 font-weight:600;
-font-size:15px;
+font-size:16px;
 }
 
 .wizard-btn.secondary{
@@ -228,10 +279,23 @@ background:#007a3d;
 <div class="title">Safety Audit Observation</div>
 </div>
 
-<div class="progress">
-<span id="dot1" class="active"></span>
-<span id="dot2"></span>
-<span id="dot3"></span>
+<div class="card wizard-progress">
+
+<div class="wizard-step active" id="stepDot1">
+<div class="dot"></div>
+<div class="label">Incident Details</div>
+</div>
+
+<div class="wizard-step" id="stepDot2">
+<div class="dot"></div>
+<div class="label">Observation</div>
+</div>
+
+<div class="wizard-step" id="stepDot3">
+<div class="dot"></div>
+<div class="label">Action Plan</div>
+</div>
+
 </div>
 
 <div class="metrics">
@@ -271,9 +335,9 @@ background:#007a3d;
 
 <select id="department">
 <option value="">--select--</option>
-<option>OPTION 1</option>
-<option>OPTION 2</option>
-<option>OPTION 3</option>
+<option>Option 1</option>
+<option>Option 2</option>
+<option>Option 3</option>
 </select>
 
 <label>Line</label>
@@ -414,17 +478,23 @@ let currentStep = 1;
 
 function showStep(n)
 {
+
 document.querySelectorAll(".step")
 .forEach(s=>s.classList.remove("active"));
 
 document.getElementById("step"+n)
 .classList.add("active");
 
-document.querySelectorAll(".progress span")
+/* update wizard progress */
+
+document.querySelectorAll(".wizard-step")
 .forEach(s=>s.classList.remove("active"));
 
-document.getElementById("dot"+n)
+document.getElementById("stepDot"+n)
 .classList.add("active");
+
+window.scrollTo({top:0,behavior:"smooth"});
+
 }
 
 function nextStep(){
