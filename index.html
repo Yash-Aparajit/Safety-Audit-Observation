@@ -17,7 +17,7 @@ margin:0;
 font-family:'Poppins',sans-serif;
 
 background-image:
-url("YOUR LINK HERE");
+url("Your URL HERE");
 
 background-size:cover;
 background-position:center;
@@ -173,6 +173,49 @@ opacity:1;
 
 .hidden{display:none;}
 
+.step{display:none;}
+.step.active{display:block;}
+
+.wizard-nav{
+display:flex;
+justify-content:space-between;
+margin-top:20px;
+gap:10px;
+}
+
+.wizard-btn{
+flex:1;
+padding:14px;
+border:none;
+border-radius:10px;
+background:#1565C0;
+color:white;
+font-weight:600;
+font-size:15px;
+}
+
+.wizard-btn.secondary{
+background:#777;
+}
+
+.progress{
+display:flex;
+justify-content:center;
+gap:10px;
+margin:15px 0;
+}
+
+.progress span{
+width:12px;
+height:12px;
+border-radius:50%;
+background:#ccc;
+}
+
+.progress span.active{
+background:#007a3d;
+}
+
 </style>
 
 </head>
@@ -183,6 +226,12 @@ opacity:1;
 
 <div class="header">
 <div class="title">Safety Audit Observation</div>
+</div>
+
+<div class="progress">
+<span id="dot1" class="active"></span>
+<span id="dot2"></span>
+<span id="dot3"></span>
 </div>
 
 <div class="metrics">
@@ -204,6 +253,7 @@ opacity:1;
 
 </div>
 
+<div id="step1" class="step active">
 <div class="card">
 
 <label>Audit Date</label>
@@ -221,9 +271,9 @@ opacity:1;
 
 <select id="department">
 <option value="">--select--</option>
-<option>Dept. 1</option>
-<option>Dept. 2</option>
-<option>Dept. 3</option>
+<option>OPTION 1</option>
+<option>OPTION 2</option>
+<option>OPTION 3</option>
 </select>
 
 <label>Line</label>
@@ -261,9 +311,14 @@ opacity:1;
 </div>
 
 
+<div class="wizard-nav">
+<button class="wizard-btn" onclick="nextStep()">Next</button>
+</div>
+</div>
 
+
+<div id="step2" class="step">
 <div class="card">
-
 <label>Observation Type</label>
 
 <div class="type" onclick="setType(this)">Unsafe Act</div>
@@ -294,11 +349,6 @@ opacity:1;
 
 </div>
 
-</div>
-
-
-
-<div class="card">
 
 <label>NC Observation Remark</label>
 
@@ -314,9 +364,15 @@ opacity:1;
 </div>
 
 
+<div class="wizard-nav">
+<button class="wizard-btn secondary" onclick="prevStep()">Back</button>
+<button class="wizard-btn" onclick="nextStep()">Next</button>
+</div>
+</div>
 
+
+<div id="step3" class="step">
 <div class="card">
-
 <label>Responsibility</label>
 <input id="responsibility">
 
@@ -335,8 +391,10 @@ opacity:1;
 <label>Scope for Kaizen</label>
 <input id="kaizen" placeholder="--NA--">
 
-
+<div class="wizard-nav">
+<button class="wizard-btn secondary" onclick="prevStep()">Back</button>
 <button class="save" onclick="save()">Submit Observation</button>
+</div>
 
 <div id="msg" class="msg"></div>
 
@@ -350,6 +408,39 @@ opacity:1;
 let selectedShift="";
 let selectedType="";
 let isSaving=false;
+
+
+let currentStep = 1;
+
+function showStep(n)
+{
+document.querySelectorAll(".step")
+.forEach(s=>s.classList.remove("active"));
+
+document.getElementById("step"+n)
+.classList.add("active");
+
+document.querySelectorAll(".progress span")
+.forEach(s=>s.classList.remove("active"));
+
+document.getElementById("dot"+n)
+.classList.add("active");
+}
+
+function nextStep(){
+if(currentStep<3){
+currentStep++;
+showStep(currentStep);
+}
+}
+
+function prevStep(){
+if(currentStep>1){
+currentStep--;
+showStep(currentStep);
+}
+}
+
 
 const INCIDENT_FROM_URL = "<?= incident ?>";
 
@@ -663,7 +754,6 @@ ltiIncident.innerText = m.ltiIncident + "%";
 
 }).getSafetyMetrics();
 
-  
 </script>
 
 </body>
