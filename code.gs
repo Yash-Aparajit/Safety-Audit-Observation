@@ -34,14 +34,13 @@ function getMaster()
 
     plants:[
       "Plant_1",
-      "Plant_2",
-      "Plant_3"
+      "Plant_2"
     ],
 
     lines:[
-"Option 3",
-"Option 2",
-"Option 1",
+"Line 1",
+"Line 2",
+"Line 3",
     ]
 
   };
@@ -165,7 +164,7 @@ function saveQuickAlert(data)
         </table>
 
         <div style="margin-top:20px;text-align:center;">
-          <a href="YOUR LINK ID HERE?mode=sao&incident=${code}"
+          <a href="YOUR LINK HERE ?mode=sao&incident=${code}"
             style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
             Open Investigation Form
           </a>
@@ -185,7 +184,7 @@ function saveQuickAlert(data)
   `;
 
   MailApp.sendEmail({
-    to: "yash.aparajit@schnellecke-jeena.co.in",
+    to: "Your Mail Id Here",
     subject: subject,
     htmlBody: htmlBody
   });
@@ -391,7 +390,7 @@ System generated report. Do not reply.
 `;
 
 MailApp.sendEmail({
-to:"YOUR EMAIL HERE",
+to:"Your Mail Id Here",
 subject:subject,
 htmlBody:html
 });
