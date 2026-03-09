@@ -232,6 +232,9 @@ generatedCode = code;
 
 successMsg.style.display = "block";
 successMsg.innerHTML = "✔ Alert Sent<br>Ref: " + code;
+setTimeout(()=>{
+successMsg.style.display="none";
+},15000);
 
 btn.innerText = "Sent ✔";
 
