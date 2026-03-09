@@ -33,9 +33,9 @@ function getMaster()
   return {
 
     plants:[
-      "Plant_1",
-      "Plant_2",
-      "Plant_3"
+      "YOUR",
+      "PLANTS",
+      "HERE"
     ],
 
     lines:[
@@ -49,7 +49,6 @@ function getMaster()
   };
 
 }
-
 
 
 /* SAVE IMAGE */
@@ -235,7 +234,6 @@ function saveEntry(form)
     if(!sh)
       throw new Error("DS_Log sheet missing");
 
-
     let link="";
     let preview="";
 
@@ -277,7 +275,6 @@ function saveEntry(form)
       form.actionTaken,
 
       form.remark,
-
       link,
       preview,
 
@@ -324,7 +321,6 @@ function closeQuickAlert(code)
     }
   }
 }
-
 
 function sendDSEmail(form, imageLink)
 {
