@@ -1,5 +1,5 @@
 const LOG_SHEET = "DC_Log";
-const IMAGE_FOLDER_ID = "YOUR ID HERE";
+const IMAGE_FOLDER_ID = "";
 
 
 function doGet(e)
@@ -18,7 +18,7 @@ function doGet(e)
   {
     const t = HtmlService.createTemplateFromFile("index");
     t.incident = e.parameter.incident || "";
-    return t.evaluate().setTitle("Safety Audit Observation");
+    return t.evaluate().setTitle("Digital Safety");
   }
 
   return HtmlService
@@ -34,13 +34,11 @@ function getMaster()
 
     plants:[
       "Plant_1",
-      "Plant_2"
+      "Plant_2",
+      "Plant_New"
     ],
 
     lines:[
-"Line 1",
-"Line 2",
-"Line 3",
     ]
 
   };
@@ -99,7 +97,7 @@ function generateIncidentCode()
     Utilities.formatDate(
       new Date(),
       Session.getScriptTimeZone(),
-      "yyyyMMdd"
+      "ddMMyyyy"
     );
 
   const serial =
@@ -133,7 +131,7 @@ function saveQuickAlert(data)
     <div style="max-width:600px;margin:auto;background:white;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08);overflow:hidden;">
 
       <div style="background:#007a3d;color:white;padding:16px;text-align:center;">
-        <h2 style="margin:0;">Safety Alert Notification</h2>
+        <h2 style="margin:0;">Digital Safety Alert</h2>
       </div>
 
       <div style="padding:20px;font-size:14px;color:#333;">
@@ -159,12 +157,12 @@ function saveQuickAlert(data)
           </tr>
           <tr>
             <td style="padding:8px;font-weight:bold;">Time</td>
-            <td style="padding:8px;">${new Date().toLocaleString()}</td>
+            <td style="padding:8px;">${Utilities.formatDate(new Date(),Session.getScriptTimeZone(),"dd/MM/yyyy HH:mm")}</td>
           </tr>
         </table>
 
         <div style="margin-top:20px;text-align:center;">
-          <a href="YOUR LINK HERE ?mode=sao&incident=${code}"
+          <a href="https://script.google.com/macros/s/AKfycbwsgcknLwAssDjJyxO-bRKbc6dUXMTjUuQFLxD6uWvMSZtLZwe1nRQn2EVtQWkkNxD7/exec?mode=sao&incident=${code}"
             style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
             Open Investigation Form
           </a>
@@ -184,7 +182,7 @@ function saveQuickAlert(data)
   `;
 
   MailApp.sendEmail({
-    to: "Your Mail Id Here",
+    to: "",
     subject: subject,
     htmlBody: htmlBody
   });
@@ -230,7 +228,7 @@ function saveEntry(form)
       .getSheetByName(LOG_SHEET);
 
     if(!sh)
-      throw new Error("SAO_Log sheet missing");
+      throw new Error("DC_Log sheet missing");
 
 
     let link="";
@@ -251,8 +249,8 @@ function saveEntry(form)
     sh.appendRow([
 
       new Date(),
-      form.auditDate,
       form.incidentCode,
+      form.auditDate,
       form.plant,
       form.department,
       form.line,
@@ -391,7 +389,7 @@ System generated report. Do not reply.
 `;
 
 MailApp.sendEmail({
-to:"Your Mail Id Here",
+to:"YOUR MAIL ID HERE",
 subject:subject,
 htmlBody:html
 });
