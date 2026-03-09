@@ -374,7 +374,7 @@ background:#007a3d;
 
 <label>Reporter Type</label>
 <select id="reporterType">
-<option value="">--select--</option>
+<option value="">--Select--</option>
 <option>Operator</option>
 <option>Staff</option>
 </select>  
@@ -386,7 +386,6 @@ background:#007a3d;
 <button class="wizard-btn" onclick="nextStep()">Next</button>
 </div>
 </div>
-
 
 <div id="step2" class="step">
 <div class="card">
@@ -424,7 +423,6 @@ background:#007a3d;
 <label>NC Observation Remark</label>
 
 <textarea id="remark"></textarea>
-
 
 <label>Image</label>
 
@@ -551,7 +549,6 @@ firstAidDiv.classList.remove("hidden");
 }
 
 
-
 image.onchange=function(){
 
 const reader=new FileReader();
@@ -563,7 +560,6 @@ preview.src=reader.result;
 reader.readAsDataURL(image.files[0]);
 
 };
-
 
 
 let fadeTimer=null;
@@ -582,7 +578,6 @@ fadeTimer=setTimeout(()=>{
 msg.classList.remove("show");
 },8000);
 }
-
 
 
 function save()
