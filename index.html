@@ -646,6 +646,15 @@ submit("");
 
 }
 
+function formatIndianDate(dateStr){
+
+if(!dateStr) return "";
+
+const parts = dateStr.split("-");
+
+return parts[2] + "/" + parts[1] + "/" + parts[0];
+
+}
 
 function submit(base64)
 {
