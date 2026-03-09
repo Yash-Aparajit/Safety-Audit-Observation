@@ -1,4 +1,4 @@
-const LOG_SHEET = "SAO_Log";
+const LOG_SHEET = "DC_Log";
 const IMAGE_FOLDER_ID = "YOUR ID HERE";
 
 
@@ -278,6 +278,7 @@ function saveEntry(form)
 
       form.responsibility,
       form.actionPlan,
+      "",
       form.targetDate,
       form.status,
       form.kaizen,
