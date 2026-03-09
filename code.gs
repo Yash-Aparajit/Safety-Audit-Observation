@@ -265,6 +265,7 @@ function saveEntry(form)
       form.auditor,
       form.supervisor,
       form.reporter,
+      form.reporterType,
 
       form.type,
 
