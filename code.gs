@@ -1,10 +1,10 @@
-const LOG_SHEET = "DC_Log";
-const IMAGE_FOLDER_ID = "";
+const LOG_SHEET = "DS_Log";
+const IMAGE_FOLDER_ID = "YOUR ID HERE";
 
 
 function doGet(e)
 {
-  const mode = e.parameter.mode || "sao";
+  const mode = e.parameter.mode || "ds";
 
   if(mode === "quick")
   {
@@ -14,7 +14,7 @@ function doGet(e)
     return t.evaluate().setTitle("Quick Safety Alert");
   }
 
-  if(mode === "sao")
+  if(mode === "ds")
   {
     const t = HtmlService.createTemplateFromFile("index");
     t.incident = e.parameter.incident || "";
@@ -35,10 +35,15 @@ function getMaster()
     plants:[
       "Plant_1",
       "Plant_2",
-      "Plant_New"
+      "Plant_3"
     ],
 
     lines:[
+"YOUR",
+"DROPDOWN",
+"VALUES",
+"HERE"
+
     ]
 
   };
@@ -57,7 +62,7 @@ function saveImage(base64)
   const blob = Utilities.newBlob(
     Utilities.base64Decode(base64),
     "image/jpeg",
-    "SAO_"+Date.now()+".jpg"
+    "DS_"+Date.now()+".jpg"
   );
 
   const file = folder.createFile(blob);
@@ -103,7 +108,7 @@ function generateIncidentCode()
   const serial =
     ("0000" + count).slice(-4);
 
-  return `SAO-${today}-${serial}`;
+  return `DS-${today}-${serial}`;
 }
 
 function saveQuickAlert(data)
@@ -162,7 +167,7 @@ function saveQuickAlert(data)
         </table>
 
         <div style="margin-top:20px;text-align:center;">
-          <a href="https://script.google.com/macros/s/AKfycbwsgcknLwAssDjJyxO-bRKbc6dUXMTjUuQFLxD6uWvMSZtLZwe1nRQn2EVtQWkkNxD7/exec?mode=sao&incident=${code}"
+          <a href="YOUR LINK ID HERE?mode=ds&incident=${code}"
             style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
             Open Investigation Form
           </a>
@@ -182,7 +187,7 @@ function saveQuickAlert(data)
   `;
 
   MailApp.sendEmail({
-    to: "",
+    to: "YOUR MAIL ID HERE",
     subject: subject,
     htmlBody: htmlBody
   });
@@ -228,7 +233,7 @@ function saveEntry(form)
       .getSheetByName(LOG_SHEET);
 
     if(!sh)
-      throw new Error("DC_Log sheet missing");
+      throw new Error("DS_Log sheet missing");
 
 
     let link="";
@@ -286,7 +291,7 @@ function saveEntry(form)
     sh.setRowHeight(sh.getLastRow(),130);
     closeQuickAlert(form.incidentCode);
 
-    sendSAOEmail(form, link);
+    sendDSEmail(form, link);
 
     return true;
 
@@ -319,11 +324,11 @@ function closeQuickAlert(code)
 }
 
 
-function sendSAOEmail(form, imageLink)
+function sendDSEmail(form, imageLink)
 {
 
 const subject =
-`SAO Report Submitted | ${form.line} | ${form.type}`;
+`DS Report Submitted | ${form.line} | ${form.type}`;
 
 const html = `
 <div style="font-family:Arial;background:#f4f6f8;padding:20px">
