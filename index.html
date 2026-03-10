@@ -178,8 +178,9 @@ opacity:1;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 10px;
+padding:20px 10px;
 margin-bottom:10px;
+position:relative;
 }
 
 .wizard-progress{
@@ -187,11 +188,24 @@ background:rgba(255,255,255,0.96);
 box-shadow:0 8px 30px rgba(0,0,0,0.15);
 }
 
+.progress-line{
+position:absolute;
+top:28px;
+left:12%;
+width:76%;
+height:4px;
+background:#d0d7de;
+border-radius:3px;
+z-index:0;
+}
+
 .wizard-step{
 flex:1;
 text-align:center;
 opacity:0.5;
 transition:all .3s ease;
+position:relative;
+z-index:1;
 }
 
 .wizard-step .dot{
@@ -205,8 +219,9 @@ transition:all .3s ease;
 }
 
 .wizard-step .label{
-font-size:16px;
+font-size:15px;
 font-weight:600;
+margin-top:6px;
 }
 
 .wizard-step.active{
@@ -217,6 +232,7 @@ opacity:1;
 width:26px;
 height:26px;
 background:#007a3d;
+box-shadow:0 0 0 4px rgba(0,122,61,0.2);
 }
 
 .wizard-step.active .label{
@@ -281,6 +297,8 @@ background:#007a3d;
 
 <div class="card wizard-progress">
 
+<div class="progress-line"></div>
+
 <div class="wizard-step active" id="stepDot1">
 <div class="dot"></div>
 <div class="label">Incident Details</div>
@@ -335,9 +353,9 @@ background:#007a3d;
 
 <select id="department">
 <option value="">--select--</option>
-<option>Option_1</option>
-<option>Option_2</option>
-<option>Option_3</option>
+<option>OPTION_1</option>
+<option>OPTION_2</option>
+<option>OPTION_3</option>
 </select>
 
 <label>Line</label>
@@ -552,6 +570,7 @@ firstAidDiv.classList.remove("hidden");
 }
 
 
+
 image.onchange=function(){
 
 const reader=new FileReader();
@@ -563,6 +582,7 @@ preview.src=reader.result;
 reader.readAsDataURL(image.files[0]);
 
 };
+
 
 
 let fadeTimer=null;
@@ -581,6 +601,7 @@ fadeTimer=setTimeout(()=>{
 msg.classList.remove("show");
 },8000);
 }
+
 
 
 function save()
