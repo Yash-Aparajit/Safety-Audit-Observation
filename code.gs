@@ -224,7 +224,7 @@ function getAlertDetails(code)
 
   const data = sh.getDataRange().getValues();
 
-  for(let i=1;i<data.length;i++)
+  for(let i=data.length-1;i>=1;i--)
   {
     if(data[i][1] === code)
     {
