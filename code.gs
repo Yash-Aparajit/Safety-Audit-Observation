@@ -48,7 +48,6 @@ function getMaster()
 
 }
 
-
 /* SAVE IMAGE */
 function saveImage(base64)
 {
@@ -122,7 +121,7 @@ function saveQuickAlert(data)
     data.plant,
     data.line,
     data.type,
-    "OPEN"
+    "Alerted"
   ]);
 
   const subject = `🚨 SAFETY ALERT | ${data.type} | ${data.line} | ${code}`;
@@ -164,7 +163,7 @@ function saveQuickAlert(data)
         </table>
 
         <div style="margin-top:20px;text-align:center;">
-          <a href="YOUR URL HERE?mode=ds&incident=${code}"
+          <a href="YOUR URL ID?mode=ds&incident=${code}"
             style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
             Open Investigation Form
           </a>
@@ -292,7 +291,7 @@ function saveEntry(form)
 
     sendDSEmail(form, link);
 
-    return true;
+    return form.incidentCode || "Manual Entry";
 
   }
   finally
@@ -316,7 +315,7 @@ function closeQuickAlert(code)
   {
     if(data[i][1] === code)
     {
-      sh.getRange(i+1,6).setValue("CLOSED");
+      sh.getRange(i+1,6).setValue("Registered");
       break;
     }
   }
@@ -393,7 +392,7 @@ System generated report. Do not reply.
 `;
 
 MailApp.sendEmail({
-to:"YOUR MAIL ID HERE",
+to:"YOUR MAIL ID HERE ",
 subject:subject,
 htmlBody:html
 });
