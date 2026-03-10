@@ -723,7 +723,7 @@ google.script.run
 
 .withSuccessHandler(function(code)
 {
-showMessage("Incident: "+code "Submitted Successfully","green");
+showMessage("Incident: " + code + " Submitted Successfully","green");
 
 resetForm();
 
@@ -785,6 +785,7 @@ targetDate.value="";
 status.value="Open";
 
 kaizen.value="";
+auditDate.value = new Date().toISOString().split("T")[0];
 
 image.value="";
 
@@ -866,7 +867,9 @@ ltiIncident.innerText = m.ltiIncident + "%";
 
 }).getSafetyMetrics();
 
+  
 </script>
 
+  
 </body>
 </html>
