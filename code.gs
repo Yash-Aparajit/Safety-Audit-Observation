@@ -1,6 +1,7 @@
 const LOG_SHEET = "DS_Log";
 const IMAGE_FOLDER_ID = "YOUR FOLDER ID HERE";
 
+
 function doGet(e)
 {
   const mode = e.parameter.mode || "ds";
@@ -21,6 +22,7 @@ function doGet(e)
   return t.evaluate().setTitle("Digital Safety");
 }
 
+
 /* MASTER DATA */
 function getMaster()
 {
@@ -33,43 +35,44 @@ function getMaster()
     ],
 
     lines:[
-"LINE_1",
-"LINE_2",
-"LINE_3"
+"OPTION_1",
+"OPTION_2",
+"OPTION_3",
+
     ]
 
   };
 
 }
 
+
 /* SAVE IMAGE */
 function saveImage(base64)
 {
   if(!base64) return "";
 
-
   const now = new Date();
-  
+
   const datePart = Utilities.formatDate(
     now,
     Session.getScriptTimeZone(),
     "ddMMyy"
   );
-  
+
   const folder = DriveApp.getFolderById(IMAGE_FOLDER_ID);
-  
+
   const existing = folder.getFiles();
   let count = 0;
-  
+
   while(existing.hasNext()){
     const name = existing.next().getName();
     if(name.startsWith("DS_"+datePart)){
       count++;
     }
   }
-  
+
   const serial = ("000" + (count + 1)).slice(-3);
-  
+
   const blob = Utilities.newBlob(
     Utilities.base64Decode(base64),
     "image/jpeg",
@@ -127,86 +130,92 @@ function saveQuickAlert(data)
   const lock = LockService.getScriptLock();
   lock.waitLock(15000);
 
-  const sh =
-    SpreadsheetApp.getActive()
-    .getSheetByName("Quick_Alerts");
+  try{
+    const sh =
+      SpreadsheetApp.getActive()
+      .getSheetByName("Quick_Alerts");
 
-  const code = generateIncidentCode();
+    const code = generateIncidentCode();
 
-  sh.appendRow([
-    new Date(),
-    code,
-    data.plant,
-    data.line,
-    data.type,
-    "Alerted"
-  ]);
+    sh.appendRow([
+      new Date(),
+      code,
+      data.plant,
+      data.line,
+      data.type,
+      "Alerted"
+    ]);
 
-  const subject = `🚨 SAFETY ALERT | ${data.type} | ${data.line} | ${code}`;
+    const subject = `🚨 SAFETY ALERT | ${data.type} | ${data.line} | ${code}`;
 
-  const htmlBody = `
-  <div style="font-family:Arial,sans-serif;background:#f4f6f8;padding:20px;">
+    const htmlBody = `
+    <div style="font-family:Arial,sans-serif;background:#f4f6f8;padding:20px;">
 
-    <div style="max-width:600px;margin:auto;background:white;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08);overflow:hidden;">
+      <div style="max-width:600px;margin:auto;background:white;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08);overflow:hidden;">
 
-      <div style="background:#007a3d;color:white;padding:16px;text-align:center;">
-        <h2 style="margin:0;">Digital Safety Alert</h2>
-      </div>
-
-      <div style="padding:20px;font-size:14px;color:#333;">
-
-        <p style="margin-top:0;">A safety event has been reported from the shop floor.</p>
-
-        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
-          <tr>
-            <td style="padding:8px;font-weight:bold;">Incident Code</td>
-            <td style="padding:8px;color:#007a3d;font-weight:bold;">${code}</td>
-          </tr>
-          <tr style="background:#f9f9f9;">
-            <td style="padding:8px;font-weight:bold;">Plant</td>
-            <td style="padding:8px;">${data.plant}</td>
-          </tr>
-          <tr>
-            <td style="padding:8px;font-weight:bold;">Line</td>
-            <td style="padding:8px;">${data.line}</td>
-          </tr>
-          <tr style="background:#f9f9f9;">
-            <td style="padding:8px;font-weight:bold;">Alert Type</td>
-            <td style="padding:8px;">${data.type}</td>
-          </tr>
-          <tr>
-            <td style="padding:8px;font-weight:bold;">Time</td>
-            <td style="padding:8px;">${Utilities.formatDate(new Date(),Session.getScriptTimeZone(),"dd/MM/yyyy HH:mm")}</td>
-          </tr>
-        </table>
-
-        <div style="margin-top:20px;text-align:center;">
-          <a href="YOUR URL ID?mode=ds&incident=${code}"
-            style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
-            Open Investigation Form
-          </a>
+        <div style="background:#007a3d;color:white;padding:16px;text-align:center;">
+          <h2 style="margin:0;">Digital Safety Alert</h2>
         </div>
 
-        <hr style="margin-top:30px;border:none;border-top:1px solid #ddd;">
+        <div style="padding:20px;font-size:14px;color:#333;">
 
-        <p style="font-size:12px;color:#888;text-align:center;margin-top:10px;">
-        Please investigate at the earliest, and This is a system generated safety alert. Please do not reply to this email. 
-        </p>
+          <p style="margin-top:0;">A safety event has been reported from the shop floor.</p>
+
+          <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+            <tr>
+              <td style="padding:8px;font-weight:bold;">Incident Code</td>
+              <td style="padding:8px;color:#007a3d;font-weight:bold;">${code}</td>
+            </tr>
+            <tr style="background:#f9f9f9;">
+              <td style="padding:8px;font-weight:bold;">Plant</td>
+              <td style="padding:8px;">${data.plant}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px;font-weight:bold;">Line</td>
+              <td style="padding:8px;">${data.line}</td>
+            </tr>
+            <tr style="background:#f9f9f9;">
+              <td style="padding:8px;font-weight:bold;">Alert Type</td>
+              <td style="padding:8px;">${data.type}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px;font-weight:bold;">Time</td>
+              <td style="padding:8px;">${Utilities.formatDate(new Date(),Session.getScriptTimeZone(),"dd/MM/yyyy HH:mm")}</td>
+            </tr>
+          </table>
+
+          <div style="margin-top:20px;text-align:center;">
+            <a href="YOUR URL ID HERE ?mode=ds&incident=${code}"
+              style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
+              Open Investigation Form
+            </a>
+          </div>
+
+          <hr style="margin-top:30px;border:none;border-top:1px solid #ddd;">
+
+          <p style="font-size:12px;color:#888;text-align:center;margin-top:10px;">
+          Please investigate at the earliest, and This is a system generated safety alert. Please do not reply to this email. 
+          </p>
+
+        </div>
 
       </div>
 
     </div>
+    `;
 
-  </div>
-  `;
+    MailApp.sendEmail({
+      to: "YOUR MAIL ID HERE",
+      subject: subject,
+      htmlBody: htmlBody
+    });
 
-  MailApp.sendEmail({
-    to: "YOUR MAIL ID HERE",
-    subject: subject,
-    htmlBody: htmlBody
-  });
+    return code;
 
-  return code;
+  } finally {
+  lock.releaseLock();
+
+}
 }
 
 function getAlertDetails(code)
@@ -263,6 +272,7 @@ function saveEntry(form)
       preview=
       '=IMAGE("https://drive.google.com/uc?id='+id+'",4,120,120)';
     }
+
 
 
     sh.appendRow([
@@ -329,7 +339,7 @@ function closeQuickAlert(code)
 
   const data = sh.getDataRange().getValues();
 
-  for(let i=1;i<data.length;i++)
+  for(let i=data.length-1;i>=1;i--)
   {
     if(data[i][1] === code)
     {
@@ -338,6 +348,7 @@ function closeQuickAlert(code)
     }
   }
 }
+
 
 
 function sendDSEmail(form, imageLink)
@@ -410,7 +421,7 @@ System generated report. Do not reply.
 `;
 
 MailApp.sendEmail({
-to:"YOUR MAIL ID HERE ",
+to:"YOUR MAIL ID HERE",
 subject:subject,
 htmlBody:html
 });
