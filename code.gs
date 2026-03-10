@@ -54,10 +54,32 @@ function saveImage(base64)
 
   const folder = DriveApp.getFolderById(IMAGE_FOLDER_ID);
 
+  const now = new Date();
+  
+  const datePart = Utilities.formatDate(
+    now,
+    Session.getScriptTimeZone(),
+    "ddMMyy"
+  );
+  
+  const folder = DriveApp.getFolderById(IMAGE_FOLDER_ID);
+  
+  const existing = folder.getFiles();
+  let count = 0;
+  
+  while(existing.hasNext()){
+    const name = existing.next().getName();
+    if(name.startsWith("DS_"+datePart)){
+      count++;
+    }
+  }
+  
+  const serial = ("000" + (count + 1)).slice(-3);
+  
   const blob = Utilities.newBlob(
     Utilities.base64Decode(base64),
     "image/jpeg",
-    "DS_"+Date.now()+".jpg"
+    "DS_"+datePart+"_"+serial+".jpg"
   );
 
   const file = folder.createFile(blob);
