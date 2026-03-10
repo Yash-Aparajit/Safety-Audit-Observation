@@ -129,6 +129,9 @@ function generateIncidentCode()
 
 function saveQuickAlert(data)
 {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(15000);
+
   const sh =
     SpreadsheetApp.getActive()
     .getSheetByName("Quick_Alerts");
