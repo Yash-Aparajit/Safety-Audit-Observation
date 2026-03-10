@@ -17,7 +17,7 @@ margin:0;
 font-family:'Poppins',sans-serif;
 
 background-image:
-url("Your ULR Here");
+url("YOUR URL HERE");
 
 background-size:cover;
 background-position:center;
@@ -195,18 +195,18 @@ transition:all .3s ease;
 }
 
 .wizard-step .dot{
-width:12px;
-height:12px;
+width:18px;
+height:18px;
 border-radius:50%;
 background:#bbb;
 margin:auto;
-margin-bottom:6px;
+margin-bottom:8px;
 transition:all .3s ease;
 }
 
 .wizard-step .label{
-font-size:12px;
-font-weight:500;
+font-size:16px;
+font-weight:600;
 }
 
 .wizard-step.active{
@@ -214,8 +214,8 @@ opacity:1;
 }
 
 .wizard-step.active .dot{
-width:18px;
-height:18px;
+width:26px;
+height:26px;
 background:#007a3d;
 }
 
@@ -276,7 +276,7 @@ background:#007a3d;
 <div class="container">
 
 <div class="header">
-<div class="title">Safety Audit Observation</div>
+<div class="title">Digital Safety</div>
 </div>
 
 <div class="card wizard-progress">
@@ -335,9 +335,9 @@ background:#007a3d;
 
 <select id="department">
 <option value="">--select--</option>
-<option>Option 1</option>
-<option>Option 2</option>
-<option>Option 3</option>
+<option>Option_1</option>
+<option>Option_2</option>
+<option>Option_3</option>
 </select>
 
 <label>Line</label>
@@ -366,6 +366,7 @@ background:#007a3d;
 <label>Auditor Name</label>
 <input id="auditor">
 
+
 <label>Zone Leader</label>
 <input id="supervisor">
 
@@ -374,10 +375,10 @@ background:#007a3d;
 
 <label>Reporter Type</label>
 <select id="reporterType">
-<option value="">--Select--</option>
+<option value="">--select--</option>
 <option>Operator</option>
 <option>Staff</option>
-</select>  
+</select>
 
 </div>
 
@@ -386,6 +387,7 @@ background:#007a3d;
 <button class="wizard-btn" onclick="nextStep()">Next</button>
 </div>
 </div>
+
 
 <div id="step2" class="step">
 <div class="card">
@@ -423,6 +425,7 @@ background:#007a3d;
 <label>NC Observation Remark</label>
 
 <textarea id="remark"></textarea>
+
 
 <label>Image</label>
 
@@ -659,7 +662,7 @@ kaizen.value.trim()=="" ? "--NA--" : kaizen.value;
 
 const form={
 
-auditDate: auditDate.value,
+auditDate: formatIndianDate(auditDate.value),
 incidentCode: incidentCodeField.value.trim(),
 plant:plant.value,
 department: department.value,
@@ -669,9 +672,8 @@ shift:selectedShift,
 
 auditor:auditor.value,
 supervisor:supervisor.value,
-reporter:reporter.value,  
-reporterType:reporterType.value,  
-  
+reporter:reporter.value,
+reporterType:reporterType.value,
 
 type:selectedType,
 
@@ -698,10 +700,9 @@ kaizen: kaizenValue
 
 google.script.run
 
-.withSuccessHandler(function()
+.withSuccessHandler(function(code)
 {
-
-showMessage("Observation Submitted Successfully","green");
+showMessage("Incident: "+code "Submitted Successfully","green");
 
 resetForm();
 
@@ -745,9 +746,9 @@ area.value="";
 auditor.value="";
 
 supervisor.value="";
-  
+
 reporter.value="";
-  
+
 reporterType.value="";
 
 incidentCodeField.value="";
