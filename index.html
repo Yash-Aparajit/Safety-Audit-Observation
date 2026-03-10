@@ -562,10 +562,10 @@ el.classList.add("active");
 
 selectedType=el.innerText;
 
-firstAidDiv.classList.add("hidden");
+document.getElementById("firstAidDiv").classList.add("hidden");
 
 if(selectedType=="First Aid")
-firstAidDiv.classList.remove("hidden");
+document.getElementById("firstAidDiv").classList.remove("hidden");
 
 }
 
@@ -803,7 +803,7 @@ document.querySelectorAll(".type")
 .forEach(b=>b.classList.remove("active"));
 
 
-firstAidDiv.classList.add("hidden");
+document.getElementById("firstAidDiv").classList.add("hidden");
 
 }
 
