@@ -1,6 +1,23 @@
 const LOG_SHEET = "DS_Log";
 const IMAGE_FOLDER_ID = "YOUR FOLDER ID HERE";
 
+function getCurrentLogSheet(){
+
+  const year = new Date().getFullYear();
+
+  const name = "DS_Log_" + year;
+
+  const ss = SpreadsheetApp.getActive();
+
+  let sh = ss.getSheetByName(name);
+
+  if(!sh){
+    sh = ss.insertSheet(name);
+  }
+
+  return sh;
+
+}
 
 function doGet(e)
 {
