@@ -52,7 +52,6 @@ function saveImage(base64)
 {
   if(!base64) return "";
 
-  const folder = DriveApp.getFolderById(IMAGE_FOLDER_ID);
 
   const now = new Date();
   
