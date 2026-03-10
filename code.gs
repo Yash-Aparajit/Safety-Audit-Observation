@@ -1,5 +1,5 @@
 const LOG_SHEET = "DS_Log";
-const IMAGE_FOLDER_ID = "YOUR ID HERE";
+const IMAGE_FOLDER_ID = "YOUR FOLDER ID HERE";
 
 
 function doGet(e)
@@ -33,17 +33,15 @@ function getMaster()
   return {
 
     plants:[
-      "YOUR",
-      "PLANTS",
-      "HERE"
+      "Plant_1",
+      "Plant_2",
+      "Plant_3"
     ],
 
     lines:[
-"YOUR",
-"DROPDOWN",
-"VALUES",
-"HERE"
-
+"LINE_1",
+"LINE_2",
+"LINE_3"
     ]
 
   };
@@ -166,7 +164,7 @@ function saveQuickAlert(data)
         </table>
 
         <div style="margin-top:20px;text-align:center;">
-          <a href="YOUR LINK ID HERE?mode=ds&incident=${code}"
+          <a href="YOUR URL HERE?mode=ds&incident=${code}"
             style="display:inline-block;padding:12px 18px;background:#007a3d;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
             Open Investigation Form
           </a>
@@ -234,6 +232,7 @@ function saveEntry(form)
     if(!sh)
       throw new Error("DS_Log sheet missing");
 
+
     let link="";
     let preview="";
 
@@ -275,6 +274,7 @@ function saveEntry(form)
       form.actionTaken,
 
       form.remark,
+
       link,
       preview,
 
@@ -321,6 +321,7 @@ function closeQuickAlert(code)
     }
   }
 }
+
 
 function sendDSEmail(form, imageLink)
 {
