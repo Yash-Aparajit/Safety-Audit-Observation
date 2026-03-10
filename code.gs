@@ -5,26 +5,21 @@ function doGet(e)
 {
   const mode = e.parameter.mode || "ds";
 
-  if(mode === "quick")
-  {
-    const t = HtmlService.createTemplateFromFile("quick");
+  const page = mode === "quick" ? "quick" : "index";
+
+  const t = HtmlService.createTemplateFromFile(page);
+
+  if(mode === "quick"){
     t.line  = e.parameter.line || "Unknown Line";
     t.plant = e.parameter.plant || "Unknown Plant";
-    return t.evaluate().setTitle("Quick Safety Alert");
   }
 
-  if(mode === "ds")
-  {
-    const t = HtmlService.createTemplateFromFile("index");
+  if(mode === "ds"){
     t.incident = e.parameter.incident || "";
-    return t.evaluate().setTitle("Digital Safety");
   }
 
-  return HtmlService
-    .createHtmlOutputFromFile("index")
-    .setTitle("Safety Audit Observation");
+  return t.evaluate().setTitle("Digital Safety");
 }
-
 
 /* MASTER DATA */
 function getMaster()
