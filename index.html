@@ -39,6 +39,7 @@ color:white;
 margin-bottom:10px;
 }
 
+  
 /* ===== METRIC CARDS (MATCH FORM CARDS) ===== */
 
 .metrics{
@@ -172,6 +173,7 @@ opacity:1;
 
 .hidden{display:none;}
 
+  
 /* ===== WIZARD PROGRESS ===== */
 
 .wizard-progress{
@@ -364,11 +366,9 @@ background:#007a3d;
 
 <datalist id="lineList"></datalist>
 
-
 <label>Location/Area/Stage</label>
 
 <input id="area">
-
 
 <label>Shift</label>
 
@@ -377,13 +377,10 @@ background:#007a3d;
 <button onclick="setShift(this)">1st Shift</button>
 <button onclick="setShift(this)">2nd Shift</button>
 <button onclick="setShift(this)">3rd Shift</button>
-
 </div>
-
 
 <label>Auditor Name</label>
 <input id="auditor">
-
 
 <label>Zone Leader</label>
 <input id="supervisor">
@@ -400,12 +397,10 @@ background:#007a3d;
 
 </div>
 
-
 <div class="wizard-nav">
 <button class="wizard-btn" onclick="nextStep()">Next</button>
 </div>
 </div>
-
 
 <div id="step2" class="step">
 <div class="card">
@@ -444,7 +439,6 @@ background:#007a3d;
 
 <textarea id="remark"></textarea>
 
-
 <label>Image</label>
 
 <input type="file" id="image" accept="image/*" capture="environment">
@@ -453,27 +447,22 @@ background:#007a3d;
 
 </div>
 
-
 <div class="wizard-nav">
 <button class="wizard-btn secondary" onclick="prevStep()">Back</button>
 <button class="wizard-btn" onclick="nextStep()">Next</button>
 </div>
 </div>
 
-
 <div id="step3" class="step">
 <div class="card">
 <label>Responsibility</label>
 <input id="responsibility">
 
-
 <label>Action Plan</label>
 <textarea id="actionPlan"></textarea>
 
-
 <label>Target Date</label>
 <input type="date" id="targetDate">
-
 
 <label>Status</label>
 <input id="status" value="Open">
@@ -489,7 +478,6 @@ background:#007a3d;
 <div id="msg" class="msg"></div>
 
 </div>
-
 </div>
 
 
@@ -498,7 +486,6 @@ background:#007a3d;
 let selectedShift="";
 let selectedType="";
 let isSaving=false;
-
 
 let currentStep = 1;
 
@@ -510,6 +497,7 @@ document.querySelectorAll(".step")
 
 document.getElementById("step"+n)
 .classList.add("active");
+  
 
 /* update wizard progress */
 
@@ -537,9 +525,7 @@ showStep(currentStep);
 }
 }
 
-
 const INCIDENT_FROM_URL = "<?= incident ?>";
-
 
 function setShift(btn){
 
@@ -569,8 +555,6 @@ document.getElementById("firstAidDiv").classList.remove("hidden");
 
 }
 
-
-
 image.onchange=function(){
 
 const reader=new FileReader();
@@ -584,9 +568,7 @@ reader.readAsDataURL(image.files[0]);
 };
 
 
-
 let fadeTimer=null;
-
 
 function showMessage(text,color="green")
 {
@@ -601,7 +583,6 @@ fadeTimer=setTimeout(()=>{
 msg.classList.remove("show");
 },8000);
 }
-
 
 
 function save()
@@ -633,7 +614,6 @@ showMessage("Select Observation Type","red");
 return;
 }
 
-
 isSaving=true;
 
 
@@ -642,7 +622,6 @@ const btn=document.querySelector(".save");
 btn.disabled=true;
 
 btn.innerHTML="Submitting<span style='margin-left:6px;'>⏳</span>";
-
 
 const file=image.files[0];
 
@@ -751,10 +730,9 @@ btn.innerText="Submit Observation";
 })
 
 .saveEntry(form);
-
 }
 
-
+  
 function resetForm()
 {
 
@@ -799,10 +777,8 @@ selectedType="";
 document.querySelectorAll(".shift button")
 .forEach(b=>b.classList.remove("active"));
 
-
 document.querySelectorAll(".type")
 .forEach(b=>b.classList.remove("active"));
-
 
 document.getElementById("firstAidDiv").classList.add("hidden");
 
@@ -836,7 +812,6 @@ if(INCIDENT_FROM_URL)
   .getAlertDetails(INCIDENT_FROM_URL);
 }
 
-
 google.script.run
 .withSuccessHandler(data=>{
 
@@ -857,6 +832,7 @@ lineList.appendChild(opt);
 })
 .getMaster();
 
+  
 /* LOAD SAFETY METRICS */
 
 google.script.run.withSuccessHandler(m=>{
@@ -870,6 +846,5 @@ ltiIncident.innerText = m.ltiIncident + "%";
   
 </script>
 
-  
 </body>
 </html>
